@@ -1,13 +1,19 @@
 import React from 'react';
-// import LoginPage from './components/loginPage/login';
-import SignupPage from './components/signupPage/signup';
+import './App.css';
+import LoginSignup from './components/LoginSignup/login';
+import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
+import History from './components/FuelQuoteHistory/fuelQuoteHistory';
+import quoteForm from './components/FuelQuoteForm/quoteForm'
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <SignupPage/>
+    <div className="App">
+      <ClientProfileManagement />
+      {/* <LoginSignup /> */}
+      {/* <History /> */}
+      {/* <quoteForm /> */}
     </div>
   );
-};
+}
 
 export default App;
