@@ -1,13 +1,14 @@
 import React from 'react';
-// import LoginPage from './components/loginPage/login';
-import SignupPage from './components/signupPage/signup';
+import './App.css';
 
-const App = () => {
+import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
+
+function App() {
   return (
-    <div>
-      <SignupPage/>
+    <div className="App">
+      <ClientProfileManagement />
     </div>
   );
-};
+}
 
 export default App;
