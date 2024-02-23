@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-
-import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
+import LoginSignup from './components/LoginSignup/login';
+// import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
 
 function App() {
   return (
     <div className="App">
-      <ClientProfileManagement />
+      <LoginSignup />
     </div>
   );
 }
