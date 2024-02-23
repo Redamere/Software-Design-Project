@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.fuel-history-page {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.container {
+    width: 80%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    max-width: 800px; /* Set a maximum width for the table */
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid black;
+    margin: 0 auto; /* Center the table within the container */
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: center;
+    text-decoration: underline;
+}
+
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+caption {
+    padding: 10px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+tr:hover {
+    background-color:
+        /*white*/
+        #e0e0e0;
+}

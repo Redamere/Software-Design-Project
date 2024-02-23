@@ -13,6 +13,8 @@ import password_icon from '../Assets/password.png';
   setAction(action === 'Sign Up' ? 'Login' : 'Sign Up');
 };
 
+document.body.classList.add('signup-page');
+
 
   return (
     <div className='container'>

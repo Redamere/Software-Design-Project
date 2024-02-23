@@ -1,12 +1,24 @@
-.container{
-    display:flex;
-    flex-direction:column;
-    margin: auto;
-    margin-top: 200px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.signup-page {
+    font-family: 'Inter', sans-serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background: #D1F5FF; /* Set background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Make the container full height of the viewport */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
     width: 600px;
-    background:#D1F5FF;
+    background: #D1F5FF;
     padding-bottom: 30px;
 }
+
 .header{
     display: flex;
     flex-direction: column;
@@ -14,6 +26,7 @@
     gap: 9px;
     width: 100%;
     margin-top: 30px;
+    margin-bottom: 0px;
 }
 .text{
     color: #230b5c;
@@ -21,17 +34,16 @@
     font-weight: 700;
 }
 .underline{
-    width: 100px;
+    width: 475px;
     height: 6px;
     background: #230b5c;
     border-radius: 10px;
 }
 .inputs{
-    margin-top: 55px;
+    margin-top: 25px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-  
 }
 .input{
     display: flex;
@@ -55,8 +67,8 @@
     color: #0d0421;
     font-size: 20px;
 }
-.forgot-password{
-    padding-left: 62px;
+.forgot-password {
+    text-align: center; /* Center the text */
     margin-top: 27px;
     color: black;
     font-size: 18px;
@@ -69,7 +81,7 @@
 .submit-container{
     display: flex;
     gap: 30px;
-    margin: 60px auto;
+    margin: 30px auto;
 }
 .submit{
     display: flex;
