@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.entry {
+    text-align: center;
+}
+
+#header{
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+#title {
+    text-align: center;
+    font-family: 'Inter', sans-serif;;
+}
+
+h1 {
+    margin-top: 60px;
+}
+
+.grid-containerE{
+    font-family: "Lucida Console", monospace;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    /* border: 8px solid #7D53DE ; */
+    padding: 100px;
+    padding-bottom: 10px;
+}
+
+.grid-containerD > label {
+    text-align: left;
+}
+
+
+.grid-containerD{
+    font-family: "Lucida Console", monospace;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* border: 8px solid #7D53DE ; */
+    gap: 10px;
+    padding: 100px;
+    padding-top: 10px;
+}
+
+.grid-itemH{
+    text-align: center;
+}
+
+.grid-itemB {
+    /* text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto; */
+    /* border: 8px solid #34F6F2 ; */
+    text-align: left;
+    border-radius: 25px;
+    padding: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    /* background: linear-gradient(225deg, rgb(52,246,242, 0.5), rgb(125,83,222, 0.5)); */
+    background-color: #D1F5FF;
+}
