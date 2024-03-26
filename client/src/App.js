@@ -1,12 +1,20 @@
 import React from 'react';
-import LoginSignup from './components/LoginSignup/login';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {userState} from 'react';
+<<<<<<<<< Temporary merge branch 1
+// import LoginPage from './components/loginPage/login';
+import SignupPage from './components/signupPage/signup';
+=========
+import LoginPage from './components/loginPage/login';
+// import SignupPage from './components/signupPage/signup';
+>>>>>>>>> Temporary merge branch 2
 
 const App = () => {
   return (
     <div>
-      <LoginSignup />
+<<<<<<<<< Temporary merge branch 1
+      <SignupPage/>
+=========
+      <LoginPage />
+>>>>>>>>> Temporary merge branch 2
     </div>
   );
 };
