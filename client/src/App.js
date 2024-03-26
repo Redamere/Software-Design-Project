@@ -1,11 +1,12 @@
 import React from 'react';
-import LoginPage from './components/loginPage/login';
-// import SignupPage from './components/signupPage/signup';
+import LoginSignup from './components/LoginSignup/login';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {userState} from 'react';
 
 const App = () => {
   return (
     <div>
-      <LoginPage />
+      <LoginSignup />
     </div>
   );
 };
