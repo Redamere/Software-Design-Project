@@ -1,19 +1,22 @@
 import React from 'react';
-import './App.css';
-import LoginSignup from './components/LoginSignup/login';
-import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
-import History from './components/FuelQuoteHistory/fuelQuoteHistory';
-import quoteForm from './components/FuelQuoteForm/quoteForm'
+<<<<<<<<< Temporary merge branch 1
+// import LoginPage from './components/loginPage/login';
+import SignupPage from './components/signupPage/signup';
+=========
+import LoginPage from './components/loginPage/login';
+// import SignupPage from './components/signupPage/signup';
+>>>>>>>>> Temporary merge branch 2
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <ClientProfileManagement />
-      {/* <LoginSignup /> */}
-      {/* <History /> */}
-      {/* <quoteForm /> */}
+    <div>
+<<<<<<<<< Temporary merge branch 1
+      <SignupPage/>
+=========
+      <LoginPage />
+>>>>>>>>> Temporary merge branch 2
     </div>
   );
-}
+};
 
 export default App;

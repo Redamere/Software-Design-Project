@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
 import './login.css'
+import {useHistory} from "react-router-dom"
 
 import person from '../Assets/person.png';
-import email_icon from '../Assets/email.png';
+// import email_icon from '../Assets/email.png';
 import password_icon from '../Assets/password.png';
 
 
  const Signup = () => {
  const[action,setAction] = useState('Login')
+ const history = useHistory();
 
  const handleToggleAction = () => {
   setAction(action === 'Sign Up' ? 'Login' : 'Sign Up');
@@ -58,4 +60,5 @@ document.body.classList.add('signup-page');
 
   )
 }
+
 export default Signup;

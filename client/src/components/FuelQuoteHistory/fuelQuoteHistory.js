@@ -1,6 +1,8 @@
 import React from 'react';
 import './fuelQuoteHistory.css'
 
+
+
 const History = () => {
     return (
         <div>
@@ -12,7 +14,7 @@ const History = () => {
                     <th>Gallons Requested</th>
                     <th>Delivery Address</th>
                     <th>Delivery Date</th>
-                    <th>Suggested Price/Gallon</th>
+                    <th>Suggested Price / gallon</th>
                     <th>Total Amount Due</th>
                 </tr>
                 <tr>
@@ -28,20 +30,6 @@ const History = () => {
                     <td>2024-02-15</td>
                     <td>2.4</td>
                     <td>480</td>
-                </tr>
-                <tr>
-                    <td>150</td>
-                    <td>789 Pine St, Austin, TX</td>
-                    <td>2024-02-10</td>
-                    <td>2.6</td>
-                    <td>390</td>
-                </tr>
-                <tr>
-                    <td>150</td>
-                    <td>789 Pine St, Austin, TX</td>
-                    <td>2024-02-10</td>
-                    <td>2.6</td>
-                    <td>390</td>
                 </tr>
                 <tr>
                     <td>150</td>
