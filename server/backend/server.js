@@ -1,5 +1,6 @@
 require("dotenv").config()
 
+const quoteForm = require("./routes/QuoteForm")
 const express = require("express")
 const mongoose = require("mongoose")
 //express app
@@ -17,7 +18,7 @@ app.use((req, res, next) => {
 app.use("/api/quoteForm", quoteForm)
 
 //connect to db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI_SEAN)
     .then(() => {
         //listen for requests
     app.listen(process.env.PORT, () => {
