@@ -1,32 +1,47 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
     fullName: {
         type: String,
-        required: true
+        required: [true, 'Full name is required'],
+        trim: true,
+        minlength: [2, 'Full name must be at least 2 characters long'],
+        maxlength: [50, 'Full name cannot exceed 50 characters'],
     },
     address1: {
         type: String,
-        required: true
+        required: [true, 'Address line 1 is required'],
+        trim: true,
+        minlength: [5, 'Address line 1 must be at least 5 characters long'],
+        maxlength: [100, 'Address line 1 cannot exceed 100 characters'],
     },
     address2: {
         type: String,
-        required: false
+        trim: true,
+        maxlength: [100, 'Address line 2 cannot exceed 100 characters'],
     },
     city: {
         type: String,
-        required: true
+        required: [true, 'City is required'],
+        trim: true,
+        minlength: [2, 'City must be at least 2 characters long'],
+        maxlength: [50, 'City cannot exceed 50 characters'],
     },
     state: {
         type: String,
-        required: true
+        required: [true, 'State is required'],
+        trim: true,
+        minlength: [2, 'State must be at least 2 characters long'],
+        maxlength: [50, 'State cannot exceed 50 characters'],
     },
     zipcode: {
         type: String,
-        required: true
-    }
-})
+        required: [true, 'Zip code is required'],
+        trim: true,
+        match: [/^\d{5}(?:[-\s]\d{4})?$/, 'Invalid zip code format'],
+    },
+});
 
-module.exports = mongoose.model("Profile", profileSchema)
+module.exports = mongoose.model('Profile', profileSchema);
