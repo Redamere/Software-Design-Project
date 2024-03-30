@@ -1,11 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-const hashPassword = async (password) => {
-  const saltRounds = 10;
-  return await bcrypt.hash(password, saltRounds);
-};
-
 async function AuthController(request, response) {
   try {
     const { username, password } = request.body;
@@ -28,8 +23,7 @@ async function AuthController(request, response) {
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
+    // // Create new user
    await User.create({ username, password: hashedPassword });
 
     return response.status(201).json({ message: 'User registered successfully' });
@@ -40,3 +34,4 @@ async function AuthController(request, response) {
 }
 
 module.exports = AuthController;
+

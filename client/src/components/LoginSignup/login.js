@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './login.css';
 import axios from 'axios'; // Import Axios for making HTTP requests
@@ -8,9 +8,9 @@ import password_icon from '../Assets/password.png';
 const Signup = () => {
     const [action, setAction] = useState('Login');
     const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        confirmPassword: ''
+        username: 'fleet',
+        password: 'pass',
+        confirmPassword: 'pass'
     });
 
     const handleToggleAction = () => {
@@ -23,24 +23,25 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (action === 'Login') {
-            // Implement login functionality
-            try {
-                const response = await axios.post('/api/login', formData);
-                console.log(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            // Implement signup functionality
-            try {
-                const response = await axios.post('/api/signup', formData);
-                console.log(response.data);
-            } catch (error) {
-                console.error(error);
-            }
+        try {
+          if (action === 'Login') {
+            const response = await axios.post('http://localhost:4000/api/login', {
+              username: formData.username,
+              password: formData.password
+            });
+            handleSuccess(response.data.message);
+          } else {
+            const response = await axios.post('http://localhost:4000/api/signup', {
+              username: formData.username,
+              password: formData.password,
+              confirmPassword: formData.confirmPassword
+            });
+            handleSuccess(response.data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
         }
-    };
+      };
 
     return (
         <div className='container'>
