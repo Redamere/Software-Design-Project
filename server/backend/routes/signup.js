@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     User.findOne({ username: username}, (err, user) => {
         if (user) {
@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
         }
     })
 });
-router.post('/signup', async (req, res) => {
+router.post('/api/signup', async (req, res) => {
     const { username, password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
       res.send({ message: 'Passwords do not match' });
