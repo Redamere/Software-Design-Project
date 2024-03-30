@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711768739788" clover="3.2.0">
-  <project timestamp="1711768739788" name="All files">
-    <metrics statements="66" coveredstatements="64" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1" elements="69" coveredelements="66" complexity="0" loc="66" ncloc="66" packages="2" files="2" classes="2"/>
+<coverage generated="1711769175731" clover="3.2.0">
+  <project timestamp="1711769175731" name="All files">
+    <metrics statements="69" coveredstatements="63" conditionals="15" coveredconditionals="12" methods="1" coveredmethods="1" elements="85" coveredelements="76" complexity="0" loc="69" ncloc="69" packages="2" files="2" classes="2"/>
     <package name="controller">
       <metrics statements="19" coveredstatements="17" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="profileController.js" path="D:\Documents\Software-Design-Project\server\backend\controller\profileController.js">
