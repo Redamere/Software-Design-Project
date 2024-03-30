@@ -1,31 +1,38 @@
 const express = require('express')
-// const { 
-//     postGallons,
-//     postDeliveryAddress,
-//     getDeliveryAddress,
-//     getSuggestedPrice
-// } = require("../client/src/controller/quoteForm")
+const { 
+    postGallons,
+    postDeliveryAddress,
+    getDeliveryAddress,
+    getSuggestedPrice,
+    postSuggestedPrice,
+    getForms,
+    postFullForm,
+    getFullForm
+} = require("../controller/quoteForm")
 
 const router = express.Router()
 
 //req is an object containing information about the HTTP request raised in the event.
 //res is used to send back the desired HTTP response
 
+//get all forms (for testing purposes)
+router.get("/", getForms)
 //post gallons given by user
-router.get("/:id", (req, res) => {
-    res.json({mssg: "Posting gallons from input"})
-})
+router.get("/:id", postGallons)
 
 //post delivery date
-// router.post("/:id", getDeliveryAddress) 
+router.post("/", postDeliveryAddress) 
 
 //get delivery address
-router.get("/:id", (res, req) => {
-    res.json({mssg: "Get User's delivery address"})
-})
+router.get("/:id", getDeliveryAddress)
+
+//post a suggested price (currently using for testing purposes)
+router.post("/", postSuggestedPrice)
 //get suggested price
-router.get("/:id", (res, req) => {
-    res.json({mssg: "Get a suggested price for fuel"})
-})
+router.get("/:id", getSuggestedPrice)
+
+router.post("/", postFullForm)
+router.get("/:id", getFullForm)
+
 
 module.exports = router

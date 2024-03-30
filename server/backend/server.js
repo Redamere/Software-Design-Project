@@ -3,6 +3,7 @@ require("dotenv").config()
 const quoteForm = require("./routes/QuoteForm")
 const express = require("express")
 const mongoose = require("mongoose")
+const router = require("./routes/QuoteForm")
 //express app
 const app = express()
 
@@ -28,4 +29,12 @@ mongoose.connect(process.env.MONGO_URI_SEAN)
     .catch((error) => {
         console.log(error)
     })
-//listen for requests
+
+
+
+
+//test the get request @ localhost:4000/api/quoteForm
+
+// router.get("/", (req, res) => {
+//     res.json({mssg: "Testing Get Request"})
+// }) 
