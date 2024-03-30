@@ -8,8 +8,8 @@ import FuelQuoteForm from './components/FuelQuoteForm/quoteForm'
 function App() {
   return (
     <div className="App">
-      {/* <ClientProfileManagement /> */}
-      <LoginSignup />
+      <ClientProfileManagement />
+      {/* <LoginSignup /> */}
       {/* <History /> */}
       {/* <FuelQuoteForm /> */}
     </div>
