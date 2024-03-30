@@ -10,58 +10,34 @@ const ClientProfileManagement = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zipcode, setZipcode] = useState('');
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState(null)
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!fullName.trim()) {
-      newErrors.fullName = 'Full Name is required';
-    } else if (fullName.length > 50) {
-      newErrors.fullName = 'Full Name should be at most 50 characters';
-    }
-
-    if (!address1.trim()) {
-      newErrors.address1 = 'Address 1 is required';
-    } else if (address1.length > 100) {
-      newErrors.address1 = 'Address 1 should be at most 100 characters';
-    }
-
-    if (city.trim().length === 0) {
-      newErrors.city = 'City is required';
-    } else if (city.length > 100) {
-      newErrors.city = 'City should be at most 100 characters';
-    }
-
-    if (state.trim().length === 0) {
-      newErrors.state = 'State is required';
-    }
-
-    if (!zipcode.trim()) {
-      newErrors.zipcode = 'Zipcode is required';
-    } else if (zipcode.length < 5 || zipcode.length > 9) {
-      newErrors.zipcode = 'Zipcode should be between 5 and 9 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      // Perform the form submission or other actions here
-      console.log('Form is valid, submit the data:', {
-        fullName,
-        address1,
-        address2,
-        city,
-        state,
-        zipcode,
-      });
-    } else {
-      console.log('Form is invalid');
+    const profile = { fullName, address1, address2, city, state, zipcode }
+
+    const response = await fetch('/api/profile', {
+      method: 'POST',
+      body: JSON.stringify(profile),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setError(json.error)
+    }
+    if (response.ok) {
+      setFullName('')
+      setAddress1('')
+      setAddress2('')
+      setCity('')
+      setState('')
+      setZipcode('')
+      setError(null)
+      console.log('Profile created successfully', json)
     }
   };
 
@@ -83,7 +59,6 @@ const ClientProfileManagement = () => {
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
-          {errors.fullName && <p className="error-text">{errors.fullName}</p>}
         </div>
 
         <div className="form-group">
@@ -95,7 +70,6 @@ const ClientProfileManagement = () => {
             value={address1}
             onChange={(e) => setAddress1(e.target.value)}
           />
-          {errors.address1 && <p className="error-text">{errors.address1}</p>}
         </div>
 
         <div className="form-group">
@@ -118,7 +92,6 @@ const ClientProfileManagement = () => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-          {errors.city && <p className="error-text">{errors.city}</p>}
         </div>
 
         <div className="form-group">
@@ -181,7 +154,6 @@ const ClientProfileManagement = () => {
             <option value="WI">WI</option>
             <option value="WY">WY</option>
           </select>
-          {errors.state && <p className="error-text">{errors.state}</p>}
         </div>
 
         <div className="form-group">
@@ -193,12 +165,12 @@ const ClientProfileManagement = () => {
             value={zipcode}
             onChange={(e) => setZipcode(e.target.value)}
           />
-          {errors.zipcode && <p className="error-text">{errors.zipcode}</p>}
         </div>
 
         <button type="submit" className="register-btn">
           Save Information
         </button>
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
