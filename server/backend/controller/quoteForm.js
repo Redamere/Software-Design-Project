@@ -7,7 +7,6 @@ const getForms = async(req, res) => {
     res.status(200).json(forms)
 }
 
-
 //post gallons given by user
 const postGallons = async (req, res) => {
     let gallons = req.body //let gallons be the body of the request
@@ -88,7 +87,7 @@ const getFullForm = async (req, res) => {
     const {id} = req.params
     let form = await quoteForm.findByID(id)
     if (!form){
-        return res.status(404).json({error: "Cannot find this price"})
+        return res.status(404).json({error: ""})
     }
     res.status(400).json(form)
 }
