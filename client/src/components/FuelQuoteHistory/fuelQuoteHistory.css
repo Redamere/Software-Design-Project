@@ -1,14 +1,15 @@
 body {
-    background: linear-gradient(90deg, #B19CD9, lightblue);
+    background: linear-gradient(45deg, #B19CD9, lightblue);
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    margin-left: auto;
-    margin-left: auto;
-
+    margin: 0 auto;
+    /* This centers the table and adds space around it */
+    padding: 8px;
 }
+
 
 th,
 td {

@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       {/* <ClientProfileManagement /> */}
-      <LoginSignup />
-      {/* <History /> */}
+      {/*<LoginSignup /> */}
+      <History />
       {/* <FuelQuoteForm /> */}
     </div>
   );
