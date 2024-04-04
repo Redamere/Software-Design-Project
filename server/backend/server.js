@@ -1,17 +1,15 @@
 require("dotenv").config()
 
 const mongoose = require("mongoose")
-<<<<<<< HEAD
-const router = require("./routes/QuoteForm")
-//express app
-=======
 
 const express = require("express")
-const quoteForm = require("./routes/signup")
+const quoteForm = require("./routes/quoteForm")
 const profileRoutes = require('./routes/profiles')
+const signup = require('./routes/signup')
+const login = require('./routes/login')
+
 
 // express app
->>>>>>> origin/new-main
 const app = express()
 
 // middleware -- code that executes between getting a request and seding a response
@@ -25,6 +23,8 @@ app.use((req, res, next) => {
 // routes (Must use double quotes ("") instead of single quotes? (''))
 app.use("/api/signup", quoteForm)
 app.use('/api/profile', profileRoutes)
+app.use('/api/signup', signup)
+app.use('/api/login', login)
 
 app.get('/', (req, res) => {
     res.json({mssg: "Welcome to the homepage"})
@@ -42,18 +42,7 @@ mongoose.connect(process.env.MONGO_URI_SEAN)
         console.log(error)
     })
 
-<<<<<<< HEAD
-
-
-
-//test the get request @ localhost:4000/api/quoteForm
-
-// router.get("/", (req, res) => {
-//     res.json({mssg: "Testing Get Request"})
-// }) 
-=======
 //listen for requests
 // app.listen(process.env.PORT, () => {
 //     console.log("Listening on port " + process.env.PORT)
 // })
->>>>>>> origin/new-main

@@ -1,33 +1,49 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema({
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
-        unique: true
+        required:  [true, 'Username is required'],
+        unique: true,
+        trim: true,
+        minlength: [2, 'Username must be at least 2 characters long'],
+        maxlength: [50, 'Username cannot exceed 50 characters']
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Password is required'],
+        minlength: [2, 'Password must be at least 6 characters long']
+    },
+    confirmPassword: {
+        type: String,
+        required: [true, 'Confirm Password is required'],
+        validate: {
+            validator: function(value) {
+                return value === this.password;
+            },
+            message: 'Passwords do not match'
+        }
     }
 });
 
-// Hash password before saving to the database
 userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) {
-        return next();
-    }
     try {
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(this.password, saltRounds);
-        this.password = hashedPassword;
+        if (!this.isModified('password')) {
+            return next();
+        }
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        this.confirmPassword = undefined; // Clear confirmPassword field after hashing
         next();
     } catch (error) {
         next(error);
     }
 });
 
-const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+
+
+module.exports = mongoose.model('User', userSchema);
