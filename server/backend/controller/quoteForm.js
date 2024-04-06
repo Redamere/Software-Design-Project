@@ -1,33 +1,33 @@
 const quoteForm = require("../models/quoteFormModels")
 const mongoose = require("mongoose")
 
-//get all forms
-const getForms = async(req, res) => {
-    const forms = await quoteForm.find({}).sort({createdAt: -1})
-    res.status(200).json(forms)
-}
+// //get all forms
+// const getForms = async (req, res) => {
+//     const forms = await quoteForm.find({}).sort({ createdAt: -1 })
+//     res.status(200).json(forms)
+// }
 
 
 //post gallons given by user
 const postGallons = async (req, res) => {
     let gallons = req.body //let gallons be the body of the request
-    
+
     try {
         let response_gallons = await quoteForm.create(gallons)
         res.status(200).json(response_gallons)
     }
-    catch (error ){
-        res.status(400).json({error: error.message})
+    catch (error) {
+        res.status(400).json({ error: error.message })
     }
 
 }
 
-    //get gallons (used for testing purposes)
+//get gallons (used for testing purposes)
 const getGallons = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     let gallonRequest = await quoteForm.findByID(id)
-    if (!gallonRequest){
-        return res.stats(404).json({error: "Cannot find this price"})
+    if (!gallonRequest) {
+        return res.status(404).json({ error: "Cannot find this price" })
     }
     return res.status(200).json(gallonRequest)
 }
@@ -36,28 +36,28 @@ const postDeliveryAddress = async (req, res) => {
     let requestedDate = req.body
     // add document to database
     try {
-    let deliveryDate = await quoteForm.create(requestedDate)
+        let deliveryDate = await quoteForm.create(requestedDate)
         res.status(200).json(deliveryDate)
-    } catch (error){
-        res.status(400).json({error: error.message})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 
 //get delivery address
 const getDeliveryAddress = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     let deliveryAddress = await quoteForm.findByID(id)
     if (!deliveryAddress) {
-        return res.status(404).json({error: "Cannot find this address"})
+        return res.status(404).json({ error: "Cannot find this address" })
     }
     res.status(200).json(deliveryAddress)
 }
 //get suggested price
 const getSuggestedPrice = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     let price = await quoteForm.findByID(id)
-    if (!price){
-        return res.status(404).json({error: "Cannot find this price"})
+    if (!price) {
+        return res.status(404).json({ error: "Cannot find this price" })
     }
     res.status(400).json(price)
 }
@@ -67,40 +67,40 @@ const postSuggestedPrice = async (req, res) => {
     let postRequest = req.body
 
     try {
-    let price = await quoteForm.create(postRequest)
+        let price = await quoteForm.create(postRequest)
         res.status(200).json(price)
-    } catch (error){
-        res.status(400).json({error: error.message})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 
-const postFullForm = async(req, res) => {
-    let {address, date, gallons, price} = req.body
+const postFullForm = async (req, res) => {
+    let { address, date, gallons, price } = req.body
 
     try {
         let form = await (quoteForm.create(address, date, gallons, price))
         res.status(200).json(form)
-    } catch (error){
-        res.status(400).json({error: error.message})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 const getFullForm = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     let form = await quoteForm.findByID(id)
-    if (!form){
-        return res.status(404).json({error: "Cannot find this price"})
+    if (!form) {
+        return res.status(404).json({ error: "Cannot find this price" })
     }
     res.status(400).json(form)
 }
 module.exports = {
     postGallons,
     getGallons,
-    postDeliveryAddress,
-    getDeliveryAddress,
-    getSuggestedPrice,
-    postSuggestedPrice,
-    getForms,
-    postFullForm,
-    getFullForm,
+    // postDeliveryAddress,
+    // getDeliveryAddress,
+    // getSuggestedPrice,
+    // postSuggestedPrice,
+    // getForms,
+    // postFullForm,
+    // getFullForm,
 }
 
