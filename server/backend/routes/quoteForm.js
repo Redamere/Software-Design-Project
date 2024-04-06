@@ -1,13 +1,15 @@
 const express = require('express')
 const { 
-    postGallons,
-    postDeliveryAddress,
-    getDeliveryAddress,
-    getSuggestedPrice,
-    postSuggestedPrice,
     getForms,
-    postFullForm,
-    getFullForm
+    postQuoteForm,
+    getQuoteForm,
+    // postGallons,
+    // postDeliveryAddress,
+    // getDeliveryAddress,
+    // getSuggestedPrice,
+    // postSuggestedPrice,
+    // postFullForm,
+    // getFullForm
 } = require("../controller/quoteForm")
 
 const router = express.Router()
@@ -17,22 +19,29 @@ const router = express.Router()
 
 //get all forms (for testing purposes)
 router.get("/", getForms)
+
+//post new quote form
+router.post("/", postQuoteForm)
+
+//get quote form 
+router.get("/:id", getQuoteForm)
+
 //post gallons given by user
-router.get("/:id", postGallons)
+// router.get("/:id", postGallons)
 
-//post delivery date
-router.post("/", postDeliveryAddress) 
+// //post delivery date
+// router.post("/", postDeliveryAddress) 
 
-//get delivery address
-router.get("/:id", getDeliveryAddress)
+// //get delivery address
+// router.get("/:id", getDeliveryAddress)
 
-//post a suggested price (currently using for testing purposes)
-router.post("/", postSuggestedPrice)
-//get suggested price
-router.get("/:id", getSuggestedPrice)
+// //post a suggested price (currently using for testing purposes)
+// router.post("/", postSuggestedPrice)
+// //get suggested price
+// router.get("/:id", getSuggestedPrice)
 
-router.post("/", postFullForm)
-router.get("/:id", getFullForm)
+// router.post("/", postFullForm)
+// router.get("/:id", getFullForm)
 
 
 module.exports = router

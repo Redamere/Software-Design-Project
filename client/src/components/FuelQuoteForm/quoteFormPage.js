@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 //pages
-import QuoteForm from './fuelQuoteForm/quoteForm'
+import QuoteForm from "./fuelQuoteForm/quoteForm"
 
 function App(){
     return (
