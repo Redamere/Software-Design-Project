@@ -1,9 +1,10 @@
 require("dotenv").config()
 
 const quoteForm = require("./routes/QuoteForm")
+const quoteHistory = require("./routes/quoteHistory")
 const express = require("express")
 const mongoose = require("mongoose")
-// const router = require("./routes/QuoteForm")
+const router = require("./routes/QuoteForm")
 
 
 //express app
@@ -19,15 +20,16 @@ app.use((req, res, next) => {
 
 // routes (Must use double quotes ("") instead of single quotes? (''))
 app.use("/api/quoteForm", quoteForm)
+app.use("/api/quoteHistory", quoteHistory)
 
 //connect to db
-mongoose.connect(process.env.MONGO_URI_SEAN)
+mongoose.connect(process.env.MONGO_URI_CHINEDU)
     .then(() => {
         //listen for requests
-    app.listen(process.env.PORT, () => {
-    console.log("Connected to Mongoose and Listening on port " + process.env.PORT)
-             })
+        app.listen(process.env.PORT, () => {
+            console.log("Connected to Mongoose and Listening on port " + process.env.PORT)
         })
+    })
     .catch((error) => {
         console.log(error)
     })

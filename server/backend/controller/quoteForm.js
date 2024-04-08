@@ -112,7 +112,7 @@ const getQuoteForm = async (req, res) => {
 //     res.status(400).json(form)
 // }
 module.exports = {
-    getForms,
+    // getForms,
     postQuoteForm,
     getQuoteForm,
     // postGallons,
