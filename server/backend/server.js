@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 })
 
 // routes (Must use double quotes ("") instead of single quotes? (''))
-app.use("/api/signup", quoteForm)
+app.use("/api/quoteForm", quoteForm)
 app.use('/api/profile', profileRoutes)
 app.use('/api/signup', signup)
 app.use('/api/login', login)

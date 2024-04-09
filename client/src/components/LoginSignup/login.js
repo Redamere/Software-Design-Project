@@ -12,6 +12,7 @@ const Signup = () => {
         confirmPassword: ''
     });
     const [error, setError] = useState('');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -43,10 +44,9 @@ const Signup = () => {
                 }
                 if (action === 'Sign Up') {
                     // Clear form fields after successful signup
-                    setUsername('');
-                    setPassword('');
-                    setConfirmPassword('');
+                    setFormData({ username: '', password: '', confirmPassword: '' });
                     console.log('Signup Successful');
+                    window.location.href = '/login';
                 }
             }
         } catch (error) {
@@ -91,6 +91,7 @@ const Signup = () => {
             <div className='submit-container'>
                 <button className='submit' onClick={handleSubmit}>{action}</button>
             </div>
+            {error && <div className="error-message">{error}</div>} {/* Display error message if present */}
         </div>
     );
 };
