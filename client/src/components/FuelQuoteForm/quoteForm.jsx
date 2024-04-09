@@ -5,7 +5,7 @@ import './quoteForm.css';
 import {useEffect, useState} from 'react'
 
 //components
-import FormDetails from './FormDetails';
+import FormDetails from './formDetails';
 //import QuoteForm from "./components/FuelQuoteForm/quoteForm"
 
 //documentation
