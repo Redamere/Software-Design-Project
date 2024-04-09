@@ -27,6 +27,17 @@ const getQuoteForm = async (req, res) => {
     }
 }
 
+
+
+
+/* 
+
+    The below code is commented out because it is no longer needed. It was used for testing purposes earlier in production. Please do not delete unless approved by Sean.
+
+*/
+
+
+
 // //post gallons given by user
 // const postGallons = async (req, res) => {
 //     let gallons = req.body //let gallons be the body of the request
@@ -111,6 +122,12 @@ const getQuoteForm = async (req, res) => {
 //     }
 //     res.status(400).json(form)
 // }
+
+
+
+
+
+//some export functions are commented out because they are no longer being used unless for testing purposes
 module.exports = {
     // getForms,
     postQuoteForm,

@@ -1,3 +1,8 @@
+
+//This is a form structure put into a JSX component to display all the properties from a published quote form. Initially used for testing, still needs to be polished for production use.
+//NOT FINISHED
+
+
 const FormDetails = ({quoteForms}) => {
     return (
         <div className="quoteform-details">

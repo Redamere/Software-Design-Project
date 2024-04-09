@@ -10,7 +10,8 @@ import FormDetails from './formDetails.jsx';
 
 //documentation
 
-
+//create the uses states of the quote form variables. Variable stats begin as null,
+// paired with a set function to update the state of the variable
 const QuoteForm = () => {
   const [gallons, setGallons] = useState('')
   const [date, setDate] = useState('')
@@ -22,38 +23,49 @@ const QuoteForm = () => {
 
 
 
-
+//useEffect function 
   useEffect(() => {
-
+    //async function to fetch quote from data from the API.
     const fetchQuoteForm = async () => {
+      // await a response from the API
       const response = await fetch("/api/quoteForm")
+      //turn the response into a JSON file
       const json = await response.json()
-
+      // Check if the response is sucesssful. 
       if (response.ok) {
+      // If successful, set the quoteForms variable to the response from the API
         setQuoteForms(json)
       }
     }
+    // Call the fetchQuoteForm function when the component mounts
     fetchQuoteForm()
   }, [])
 
+
+  //function to that calls when the submit button is hit
   const handleSubmit = async (e) => {
-    e.preventDefault
+    e.preventDefault // allows the form refresh, prevents default form submission 
+    // create an object to hold quote form information
     const quoteform = { gallons, date, address, price, due }
 
+    // Send a POST request to the API with the data from the submission
     const response = await fetch('/api/quoteForm',
       {
-        method: "POST",
-        body: JSON.stringify(quoteform),
+        method: "POST", //specifies the HTTP method to be post 
+        body: JSON.stringify(quoteform), //convert the form data into a JSON string
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json' //set the request header to specify JSON content
         }
       })
+
+      //Parse the JSON response
     const json = await response.json()
 
+    
     if (!response.ok) { //return the error if there is one
       setError(json.error)
     }
-    if (response.ok) {
+    if (response.ok) { //If response is successful, clear the field varialbes
       setGallons('')
       setDate('')
       setAddress('')
