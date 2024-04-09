@@ -23,7 +23,7 @@ app.use("/api/quoteForm", quoteForm)
 app.use("/api/quoteHistory", quoteHistory)
 
 //connect to db
-mongoose.connect(process.env.MONGO_URI_CHINEDU)
+mongoose.connect(process.env.MONGO_URI_SEAN)
     .then(() => {
         //listen for requests
         app.listen(process.env.PORT, () => {
