@@ -1,8 +1,8 @@
 const express = require('express')
 const {
     createQuote,
-    getAllQuotes,
-    getQuoteForm,
+    allQuotes,
+    getQuote,
     updateQuote,
     deleteQuote
 } = require('../controller/quoteHistoryController')
@@ -10,13 +10,13 @@ const {
 
 const router = express.Router()
 
-router.get('/', () => { })
+// router.get('/', () => { })
 
 //post new quote form
 router.post("/", createQuote)
 
 //get quote form 
-router.get("/:id", getQuoteForm)
+router.get("/:id", getQuote)
 
 // Delete quote form
 router.delete("/:id", deleteQuote)
@@ -25,6 +25,6 @@ router.delete("/:id", deleteQuote)
 router.patch("/:id", updateQuote)
 
 // get all quote forms
-router.get('/', getAllQuotes)
+router.get("/", allQuotes)
 
 module.exports = router

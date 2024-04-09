@@ -9,18 +9,18 @@ const createQuote = async (req, res) => {
     // add doc to db
     try {
         const createQuote = await quoteHistory.create({ FormAddress, FormDate, FormGallons, FormPrice })
-        res.status(200).json(quoteHistory)
+        res.status(200).json(createQuote)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 }
 
 // get quote form
-const getQuoteForm = async (req, res) => {
+const getQuote = async (req, res) => {
     const { id } = req.params
 
     // Testing if the Id we got is valid
-    if (!moongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such quote" })
     }
 
@@ -30,14 +30,14 @@ const getQuoteForm = async (req, res) => {
         return res.status(404).json({ error: "No such quote" })
     }
 
-    response.status(200).json(getQuote)
+    res.status(200).json(getQuote)
 }
 
 // get all forms
-const getAllQuotes = async (req, res) => {
-    const getAllQuotes = await quoteHistory.find({}).sort({ createdAT: -1 })
+const allQuotes = async (req, res) => {
+    const allQuotes = await quoteHistory.find({}).sort({ createdAt: -1 })
 
-    res.status(200).json(getAllQuotes)
+    res.status(200).json(allQuotes)
 }
 
 // update quote form
@@ -45,7 +45,7 @@ const updateQuote = async (req, res) => {
     const { id } = req.params
 
     // Testing if the Id we got is valid
-    if (!moongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such quote" })
     }
 
@@ -65,7 +65,7 @@ const deleteQuote = async (req, res) => {
     const { id } = req.params
 
     // Testing if the Id we got is valid
-    if (!moongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: "No such quote" })
     }
 
@@ -88,8 +88,8 @@ const deleteQuote = async (req, res) => {
 
 module.exports = {
     createQuote,
-    getQuoteForm,
-    getAllQuotes,
+    getQuote,
+    allQuotes,
     updateQuote,
     deleteQuote
 }
