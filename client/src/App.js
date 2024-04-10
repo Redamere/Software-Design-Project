@@ -6,6 +6,7 @@ import QuoteForm from "./components/FuelQuoteForm/quoteForm"
 import History from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
 
 
 
@@ -27,6 +28,10 @@ function App() {
                         <Route
                             path="/history"
                             element={<History />}
+                        />
+                        <Route
+                            path="/profile"
+                            element={<ClientProfileManagement />}
                         />
                     </Routes>
                 </div>
