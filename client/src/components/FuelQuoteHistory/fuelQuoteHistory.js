@@ -1,4 +1,4 @@
-import { useEffect, useState, React } from 'react'
+import { useEffect, useState } from 'react';
 import './fuelQuoteHistory.css'
 
 // components
@@ -25,9 +25,9 @@ const History = () => {
     return (
         <div className="container">
             <div className="quotes">
-                {quotes && quotes.map((quote) => {
-                    <quoteHistoryDetails key={quote._id} quotes={quote} />
-                })}
+                {quotes && quotes.map((quote) => (
+                    <quoteHistoryDetails key={quote._id} quoteHistory={quote} />
+                ))}
             </div>
 
 
@@ -89,22 +89,22 @@ var fuelQuotes = [
         deliveryDate: "2024-02-20",
         suggestedPrice: 2.5,
         totalAmount: 250
-    },
+        
     {
         gallonsRequested: 200,
         deliveryAddress: "456 Elm St, Dallas, TX",
         deliveryDate: "2024-02-15",
         suggestedPrice: 2.4,
         totalAmount: 480
-    },
+        
     {
         gallonsRequested: 150,
         deliveryAddress: "789 Pine St, Austin, TX",
         deliveryDate: "2024-02-10",
         suggestedPrice: 2.6,
         totalAmount: 390
-    }
-];
+        
+    
 
 //Create a table element and append it to the document body
 var table = document.createElement("table");
@@ -122,20 +122,20 @@ for (var i = 0; i < headers.length; i++) {
     var headerCell = document.createElement("th");
     headerCell.textContent = headers[i];
     headerRow.appendChild(headerCell);
-}
+    
 
 //Loop through the fuelQuotes array and create a table data row for each one
 for (var i = 0; i < fuelQuotes.length; i++) {
     var dataRow = document.createElement("tr");
     table.appendChild(dataRow);
-
+    
     //Loop through the properties of each fuel quote object and create a table data cell for each one
     for (var prop in fuelQuotes[i]) {
         var dataCell = document.createElement("td");
         dataCell.textContent = fuelQuotes[i][prop];
         dataRow.appendChild(dataCell);
-    }
-}
+        
+    
 */
 
 // to be able to style the table
