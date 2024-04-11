@@ -1,10 +1,37 @@
-import React from 'react';
+import { useEffect, useState, React } from 'react'
 import './fuelQuoteHistory.css'
 
+// components
+import quoteHistoryDetails from './quoteHistoryDetails'
+
 const History = () => {
+
+    const [quotes, setQuotes] = useState(null)
+
+    useEffect(() => {
+        const fetchQuotes = async () => {
+            const response = await fetch('/api/quoteHistory')
+            const json = await response.json()
+
+            if (response.ok) {
+                setQuotes(json)
+                console.log(response)
+            }
+        }
+
+        fetchQuotes()
+    }, [])
+
     return (
         <div className="container">
-            <table className="table">
+            <div className="quotes">
+                {quotes && quotes.map((quote) => {
+                    <quoteHistoryDetails key={quote._id} quotes={quote} />
+                })}
+            </div>
+
+
+            {/* <table className="table">
                 <caption className="caption">
                     <h1>Fuel Quote History</h1>
                 </caption>
@@ -40,7 +67,7 @@ const History = () => {
                         <td>390</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
         </div>
     );
 };
