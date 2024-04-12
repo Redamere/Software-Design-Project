@@ -5,7 +5,7 @@ import './fuelQuoteHistory.css'
 // components
 import QuoteHistoryDetails from './quoteHistoryDetails'
 // import FormDetails from '../formDetails';
-import FormDetails from '../FuelQuoteForm/formDetails';
+// import FormDetails from '../FuelQuoteForm/formDetails';
 
 const History = () => {
 
@@ -20,8 +20,8 @@ const History = () => {
                 setQuotes(json)
                 console.log(response)
             }
-             }
-        
+        }
+
         fetchQuotes()
     }, [])
 

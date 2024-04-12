@@ -27,7 +27,7 @@ app.use('/api/signup', signup)
 app.use('/api/login', login)
 
 app.get('/', (req, res) => {
-    res.json({mssg: "Welcome to the homepage"})
+    res.json({ mssg: "Welcome to the homepage" })
 })
 
 // connect to db

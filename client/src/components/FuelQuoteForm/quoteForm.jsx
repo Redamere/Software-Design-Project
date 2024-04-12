@@ -2,7 +2,7 @@ import React from 'react';
 import './quoteForm.css';
 
 // const router = require("./routes/QuoteForm")
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
 //components
 import FormDetails from './formDetails';
@@ -12,88 +12,88 @@ import FormDetails from './formDetails';
 
 
 const QuoteForm = () => {
-const [gallons, setGallons] = useState('')
-const [date, setDate] = useState('')
-const [address, setAddress] = useState('')
-const [price, setPrice] = useState('')
-const [due, setDue] = useState('')
-const [error, setError] = useState('')
-const [quoteForms, setQuoteForms] = useState('')
+  const [gallons, setGallons] = useState('')
+  const [date, setDate] = useState('')
+  const [address, setAddress] = useState('')
+  const [price, setPrice] = useState('')
+  const [due, setDue] = useState('')
+  const [error, setError] = useState('')
+  const [quoteForms, setQuoteForms] = useState('')
 
-useEffect(() => {
+  useEffect(() => {
 
     const fetchQuoteForm = async () => {
-        const response = await fetch("/api/quoteForm")
-        const json = await response.json()
+      const response = await fetch("/api/quoteForm")
+      const json = await response.json()
 
-        if (response.ok){
-            console.log("hello")
-            setQuoteForms(json)
-            // console.log(json)
-        }
-        console.log("bye")
+      if (response.ok) {
+        console.log("hello")
+        setQuoteForms(json)
+        // console.log(json)
+      }
+      console.log("bye")
     }
     fetchQuoteForm()
-}, [])
+  }, [])
 
-const handleSubmit = async (e) => {
-  e.preventDefault(); // Prevents the default form submission behavior
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevents the default form submission behavior
 
-  const quoteform = { address, date, gallons, price };
+    const quoteform = { address, date, gallons, price };
 
-  const response = await fetch('/api/quoteForm', {
-    method: "POST",
-    body: JSON.stringify(quoteform),
-    headers: {
-      'Content-type': 'application/json'
+    const response = await fetch('/api/quoteForm', {
+      method: "POST",
+      body: JSON.stringify(quoteform),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    const json = await response.json();
+    console.log("got here");
+    if (!response.ok) {
+      setError(json.error);
     }
-  });
-  const json = await response.json();
-  console.log("got here");
-  if (!response.ok) {
-    setError(json.error);
+    if (response.ok) {
+      setGallons('');
+      setDate('');
+      setAddress('');
+      setPrice('');
+      setDue('');
+      setError(null);
+      console.log("New Form Created", json);
+    }
   }
-  if (response.ok) {
-    setGallons('');
-    setDate('');
-    setAddress('');
-    setPrice('');
-    setDue('');
-    setError(null);
-    console.log("New Form Created", json);
-  }
-}
 
 
-    return (
-        <div>
-        <meta charSet="UTF-8" />
-        <h1 id="title">Fuel Quote Form</h1>
-        {/*Must have  --
+  return (
+    <div>
+      <meta charSet="UTF-8" />
+      <h1 id="title">Fuel Quote Form</h1>
+      {/*Must have  --
     Gallons requested (numeric, required)
     Delivery Address (Non-editable, comes from client profile)
     Delivery Date (Calendar, Date Picker)
     Suggested Price/gallon (numberic non-editable, price will be calculated 
         by pricing module -- We are not building this yet (2/17/2024))
     -Total Amount Due (numeric non-editable, calculated [gallons * price])
-*/} 
-        <div className="testDetails">
+*/}
+      {/* <div className="testDetails">
             <p>Test details</p>
             {quoteForms && quoteForms.map((thisQuoteForm) => (
               <FormDetails key = {quoteForms._id} quoteForms = {thisQuoteForm}/>
             ))}
-        </div>
+        </div> */}
 
 
-          <div>
-              <form className="createForm" onSubmit={handleSubmit}>
+      <div>
+        <form className="createForm" onSubmit={handleSubmit}>
           <div className="grid-containerE">
             <div className="grid-itemB">
               <form>
                 <label htmlFor="gallonsRequested">Gallons Requested:</label>
-                <input type="text" id="gallonsRequested" name="gallonsRequested" placeholder="How many gallons?" required onChange={(e) => setGallons(e.target.value)} value={gallons}/>
+                <input type="text" id="gallonsRequested" name="gallonsRequested" placeholder="How many gallons?" required onChange={(e) => setGallons(e.target.value)} value={gallons} />
                 <p>How many gallons are you requesting?</p>
-                <p/>
+                <p />
                 {/* <button name="gallonsRequested" value="gallonsRequested" type="submit">Submit</button> */}
               </form>
             </div>
@@ -101,7 +101,7 @@ const handleSubmit = async (e) => {
             <div className="grid-itemB">
               <form>
                 <label htmlFor="deliveryDate">Delivery Date:</label>
-                <input type="date" id="deliveryDate" name="deliveryDate" onChange={(e)=>setDate(e.target.value)} value={date}/>
+                <input type="date" id="deliveryDate" name="deliveryDate" onChange={(e) => setDate(e.target.value)} value={date} />
                 <p>What delivery date would you expect?</p>
                 {/* <form action method="post"><button name="dateSubmit" value="dateSubmit" type="submit">Submit</button></form> */}
               </form>
@@ -109,42 +109,43 @@ const handleSubmit = async (e) => {
           </div>
 
 
-        <div className="grid-containerD">
-          <div className="grid-itemB">
-            <form>
-              <label htmlFor="deliveryAddress">Delivery Address</label>
-              <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" onChange={(e)=>setAddress(e.target.value)} value={address}/> 
-              <p>This is the delivery Address where your product will be delivered. (Address is default based on customer profile)</p>
-              {/* <form action method="get"><button name="deliveryAddress" value="deliveryAddress" type="submit">Get My Address</button></form> */}
-            </form>
-          </div>
-
-          <div className="grid-itemB">
-            <form>
-              <label htmlFor="suggestedPrice">Suggested Price</label>
-              <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e)=>setPrice(e.target.value)} value={price} /> 
-              <p>This is the suggested price per gallon of your product, automatically calculated</p>
-              {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
-            </form>
-          </div>
-
-          <div className="grid-itemB">
-            {/* <h2 style="text-align: left;">Total Amount Due</h2> */}
-            <form>
-              <label htmlFor="totalAmountDue">Total Amount Due</label>
-              <input type="text" name="totalAmountDue" id="totalAmountDue" placeholder="Your total amount due" readOnly value ="$400" />
-              <p>Total calculated amount due based on price and amount of gallons</p>
-              {/* <form action method="get"><button name="getTotalAmount" value="getTotalAmount" type="submit">Calculated Total Ammunt Due</button></form> */}
-            </form>
-          </div>
-        </div>
-        <button type="submit">Submit Form</button>
+          <div className="grid-containerD">
+            <div className="grid-itemB">
+              <form>
+                <label htmlFor="deliveryAddress">Delivery Address</label>
+                <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" onChange={(e) => setAddress(e.target.value)} value={address} />
+                <p>This is the delivery Address where your product will be delivered. (Address is default based on customer profile)</p>
+                {/* <form action method="get"><button name="deliveryAddress" value="deliveryAddress" type="submit">Get My Address</button></form> */}
               </form>
-        
-        
-        </div>
+            </div>
+
+            <div className="grid-itemB">
+              <form>
+                <label htmlFor="suggestedPrice">Suggested Price</label>
+                <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e) => setPrice(e.target.value)} value={price} />
+                <p>This is the suggested price per gallon of your product, automatically calculated</p>
+                {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
+              </form>
+            </div>
+
+            <div className="grid-itemB">
+              {/* <h2 style="text-align: left;">Total Amount Due</h2> */}
+              <form>
+                <label htmlFor="totalAmountDue">Total Amount Due</label>
+                <input type="text" name="totalAmountDue" id="totalAmountDue" placeholder="Your total amount due" readOnly value="$400" />
+                <p>Total calculated amount due based on price and amount of gallons</p>
+                {/* <form action method="get"><button name="getTotalAmount" value="getTotalAmount" type="submit">Calculated Total Ammunt Due</button></form> */}
+              </form>
+            </div>
+          </div>
+          <button type="submit">Submit Form</button>
+        </form>
+
+
       </div>
-    ); }
+    </div>
+  );
+}
 
 
 export default QuoteForm;
