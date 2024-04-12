@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //pages
 import QuoteForm from "./components/FuelQuoteForm/quoteForm"
-import { History } from './components/FuelQuoteHistory/fuelQuoteHistory';
+import History  from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';

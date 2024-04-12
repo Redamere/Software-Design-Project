@@ -5,7 +5,7 @@ import './fuelQuoteHistory.css'
 // components
 import QuoteHistoryDetails from './quoteHistoryDetails'
 
-export const History = () => {
+const History = () => {
 
     const [quotes, setQuotes] = useState(null)
 
@@ -48,4 +48,4 @@ export const History = () => {
     );
 };
 
-// export default History;
+export default History;
