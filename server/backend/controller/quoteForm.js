@@ -1,47 +1,44 @@
 const quoteForm = require("../models/quoteFormModels")
 const mongoose = require("mongoose")
 
-// //get all forms
-// const getForms = async (req, res) => {
-//     const forms = await quoteForm.find({}).sort({ createdAt: -1 })
-//     res.status(200).json(forms)
-// }
+//get all forms
+const getForms = async(req, res) => {
+    const forms = await quoteForm.find({}).sort({createdAt: -1})
+    res.status(200).json(forms)
+}
 
 const postQuoteForm = async (req, res) => {
-    let form = req.body
+    //address date gallons price
+    const {address, date, gallons, price}= req.body
 
+   
     try {
-        let formResponse = await quoteForm.create(form)
+        // Create a new document using the quoteForm model
+        const formResponse = await quoteForm.create({
+            FormAddress: address,
+            FormDate: date,
+            FormGallons: gallons,
+            FormPrice: price
+        });
         res.status(200).json(formResponse)
-    } catch (error) {
-        res.status(400).json({ error: error.message })
+    } catch(error) {
+        res.status(400).json({error: error.message})
     }
 }
 
 const getQuoteForm = async (req, res) => {
-    const { id } = req.params
+    const {id} = req.params
     let quoteRequest = await quoteForm.findById(id)
     res.status(200).json(quoteRequest)
-    if (!quoteRequest) {
-        return res.stats(404).json({ error: "Could not find this form" })
+    if (!quoteRequest){
+        return res.stats(404).json({error: "Could not find this form"})
     }
 }
-
-
-
-
-/* 
-
-    The below code is commented out because it is no longer needed. It was used for testing purposes earlier in production. Please do not delete unless approved by Sean.
-
-*/
-
-
 
 // //post gallons given by user
 // const postGallons = async (req, res) => {
 //     let gallons = req.body //let gallons be the body of the request
-
+    
 //     try {
 //         let response_gallons = await quoteForm.create(gallons)
 //         res.status(200).json(response_gallons)
@@ -122,14 +119,8 @@ const getQuoteForm = async (req, res) => {
 //     }
 //     res.status(400).json(form)
 // }
-
-
-
-
-
-//some export functions are commented out because they are no longer being used unless for testing purposes
 module.exports = {
-    // getForms,
+    getForms,
     postQuoteForm,
     getQuoteForm,
     // postGallons,
