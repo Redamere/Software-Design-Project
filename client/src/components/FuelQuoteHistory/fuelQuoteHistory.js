@@ -16,9 +16,10 @@ const History = () => {
 
             if (response.ok) {
                 setQuotes(json)
+                console.log(response)
             }
-        }
-
+             }
+        
         fetchQuotes()
     }, [])
 

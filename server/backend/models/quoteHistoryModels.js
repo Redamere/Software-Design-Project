@@ -29,6 +29,12 @@ const quoteHistorySchema = new Schema({
         minlength: [1, "price must have at least 1 character"],
         maxlength: [1000, "price cannot exceed 1000 characters"]
     },
+    // TotalPrice: {
+    //     type: Number,
+    //     required: false,
+    //     minlength: [1, "price must have at least 1 character"],
+    //     maxlength: [1000, "price cannot exceed 1000 characters"]
+    // },
 
 
 }, { timestamps: true })
