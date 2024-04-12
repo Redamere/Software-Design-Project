@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react'
+
+
+
 
 const Home = () => {
     return (
-        <div className="home">
-            <h2>Home</h2>
-        </div>
+        <>
+            <div className="home">
+                <h2>Home</h2>
+            </div>
+        </>
     )
 }
 
