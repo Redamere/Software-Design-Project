@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //pages
 import QuoteForm from "./components/FuelQuoteForm/quoteForm"
+import Login from './components/LoginSignup/login';
 import History from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -38,6 +39,7 @@ function App() {
                             element={<Login />}
                         />
                     </Routes>
+            
                 </div>
             </BrowserRouter>
         </div>
