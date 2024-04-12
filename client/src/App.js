@@ -8,7 +8,6 @@ import History from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
-import Login from './components/LoginSignup/login';
 
 
 function App() {
