@@ -1,37 +1,31 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('../models/user')
 
-async function AuthController(request, response) {
+
+const signupUser = async (req, res) => {
+  const { username, password, confirmPassword } = req.body;
   try {
-    const { username, password } = request.body;
-
-    // Check if username and password are provided
-    if (!username || !password) {
-      return response.status(400).json({ message: 'Username and password are required' });
+    // Validate request body
+    if (!username || !password || !confirmPassword) {
+      return res.status(400).json({ message: 'Username, password, and confirmPassword are required' });
     }
-
-    // Validate password strength
-    if (password.length < 8 || !/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-      return response.status(400).json({ message: 'Password must be at least 8 characters long and contain at least one letter and one digit' });
+    
+    // Check if password and confirmPassword match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: 'Passwords do not match' });
     }
-
-    // Check if user already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return response.status(400).json({ message: 'User already exists' });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    // // Create new user
-   await User.create({ username, password: hashedPassword });
-
-    return response.status(201).json({ message: 'User registered successfully' });
+    
+    // Create user
+    const user = await User.create({ username, password, confirmPassword });
+    res.status(200).json({ user });
   } catch (error) {
-    console.error('Error in AuthController:', error);
-    return response.status(500).json({ message: 'Internal Server Error' });
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
+
+};
+
+
+
+module.exports = {
+  signupUser
 }
-
-module.exports = AuthController;
-

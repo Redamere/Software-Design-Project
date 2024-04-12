@@ -1,3 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Align items to the top */
+    height: 100vh;
+    padding-top: 20px;
+    /* Add padding to create space between the table and the top */
+}
+
+/* Additional styles for the caption */
+.caption {
+    text-align: center;
+    /* Center align the caption */
+}
+
 body {
     background: linear-gradient(90deg, #B19CD9, lightblue);
 }
@@ -32,7 +48,8 @@ tr:nth-child(even) {
 caption {
     padding: 10px;
     font-weight: bold;
-    color: orangered;
+    /* color: orangered; */
+    color: black;
 }
 
 tr:hover {

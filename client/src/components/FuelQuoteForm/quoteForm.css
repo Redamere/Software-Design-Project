@@ -4,21 +4,27 @@
     text-align: center;
 }
 
-#header{
+#header {
     text-align: center;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
 }
+
 #title {
+    font-size: 24px;
+    /* Adjust font size as needed */
     text-align: center;
-    font-family: 'Inter', sans-serif;;
+    /* Center the text horizontally */
+    font-family: 'Inter', sans-serif;
+    /* Use the 'Inter' font family */
+    /* Additional styles if needed */
 }
 
 h1 {
     margin-top: 60px;
 }
 
-.grid-containerE{
+.grid-containerE {
     font-family: "Lucida Console", monospace;
     text-align: center;
     display: grid;
@@ -29,12 +35,12 @@ h1 {
     padding-bottom: 10px;
 }
 
-.grid-containerD > label {
+.grid-containerD>label {
     text-align: left;
 }
 
 
-.grid-containerD{
+.grid-containerD {
     font-family: "Lucida Console", monospace;
     text-align: center;
     display: grid;
@@ -45,7 +51,7 @@ h1 {
     padding-top: 10px;
 }
 
-.grid-itemH{
+.grid-itemH {
     text-align: center;
 }
 
@@ -61,4 +67,34 @@ h1 {
     font-weight: bold;
     /* background: linear-gradient(225deg, rgb(52,246,242, 0.5), rgb(125,83,222, 0.5)); */
     background-color: #D1F5FF;
+}
+
+/* Styles for the submit button */
+button[type="submit"] {
+    background-color: #5E4D80;
+    /* Blue background color */
+    color: #fff;
+    /* White text color */
+    border: none;
+    /* Remove border */
+    padding: 10px 20px;
+    /* Add padding */
+    cursor: pointer;
+    /* Add cursor pointer */
+    border-radius: 5px;
+    /* Add border-radius */
+    font-size: 16px;
+    /* Adjust font size */
+    margin: 40px;
+}
+
+/* Styles for the submit button on hover */
+button[type="submit"]:hover {
+    background-color: #22143E;
+    /* Darker blue background color on hover */
+}
+
+.createForm {
+    text-align: center;
+    /* Center align its child elements */
 }

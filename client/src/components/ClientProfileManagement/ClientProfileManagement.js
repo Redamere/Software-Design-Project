@@ -1,6 +1,6 @@
 // ClientProfileManagement.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ClientProfileManagement.css';
 
 const ClientProfileManagement = () => {
@@ -10,7 +10,25 @@ const ClientProfileManagement = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zipcode, setZipcode] = useState('');
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
+  const [recentProfile, setRecentProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const response = await fetch('/api/profile')
+      const json = await response.json()
+
+      if (response.ok) {
+        console.log('Profiles fetched successfully', json)
+
+        if (json.length > 0) {
+          setRecentProfile(json[json.length - 1])
+        }
+      }
+    }
+
+    fetchProfiles()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -172,6 +190,18 @@ const ClientProfileManagement = () => {
         </button>
         {error && <div className="error">{error}</div>}
       </form>
+
+    {recentProfile && (
+      <div>
+        <h2>Recent Profile</h2>
+        <p>Full Name: {recentProfile.fullName}</p>
+        <p>Address 1: {recentProfile.address1}</p>
+        <p>Address 2: {recentProfile.address2}</p>
+        <p>City: {recentProfile.city}</p>
+        <p>State: {recentProfile.state}</p>
+        <p>Zipcode: {recentProfile.zipcode}</p>
+      </div>
+    )}
     </div>
   );
 };

@@ -1,47 +1,65 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import './login.css';
-import axios from 'axios'; // Import Axios for making HTTP requests
 import person from '../Assets/person.png';
 import password_icon from '../Assets/password.png';
 
 const Signup = () => {
     const [action, setAction] = useState('Login');
     const [formData, setFormData] = useState({
-        username: 'fleet',
-        password: 'pass',
-        confirmPassword: 'pass'
+        username: '',
+        password: '',
+        confirmPassword: ''
     });
-
-    const handleToggleAction = () => {
-        setAction(action === 'Sign Up' ? 'Login' : 'Sign Up');
-    };
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const url = action === 'Login' ? '/api/login' : '/api/signup';
         try {
-          if (action === 'Login') {
-            const response = await axios.post('http://localhost:4000/api/login', {
-              username: formData.username,
-              password: formData.password
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
-            handleSuccess(response.data.message);
-          } else {
-            const response = await axios.post('http://localhost:4000/api/signup', {
-              username: formData.username,
-              password: formData.password,
-              confirmPassword: formData.confirmPassword
-            });
-            handleSuccess(response.data.message);
-          }
+            const json = await response.json();
+    
+            if (!response.ok) {
+                setError(json.error);
+            } else {
+                setError(null);
+                console.log(json.message);
+                if (action === 'Login') {
+                    // Redirect to client-profile-management upon successful login
+                    window.location.href = '/profile';
+                    console.log('Login Successful');
+                }
+                if (action === 'Sign Up') {
+                    // Clear form fields after successful signup
+                    setFormData({ username: '', password: '', confirmPassword: '' });
+                    console.log('Signup Successful');
+                    window.location.href = '/login';
+                }
+            }
         } catch (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
+            setError(error.response?.data?.error || 'An error occurred');
         }
-      };
+    };
+
+    const handleToggleAction = () => {
+        setAction(action === 'Sign Up' ? 'Login' : 'Sign Up');
+        setError(null); // Clear any previous errors when switching action
+    };
 
     return (
         <div className='container'>
@@ -74,6 +92,7 @@ const Signup = () => {
             <div className='submit-container'>
                 <button className='submit' onClick={handleSubmit}>{action}</button>
             </div>
+            {error && <div className="error-message">{error}</div>} {/* Display error message if present */}
         </div>
     );
 };

@@ -1,43 +1,47 @@
-<<<<<<< HEAD
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 //pages
 import QuoteForm from "./components/FuelQuoteForm/quoteForm"
+import Login from './components/LoginSignup/login';
+import History from './components/FuelQuoteHistory/fuelQuoteHistory';
+import Home from './components/Home/Home';
+import Navbar from './components/Navbar/Navbar';
+import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
 
-function App(){
+
+function App() {
     return (
         <div className='App'>
             <BrowserRouter>
-            <div className='Pages'>
-                <Routes>
-                    <Route
-                    path="/"
-                    element={<QuoteForm/>}
-                    />
-                </Routes>
-            </div>
+                <Navbar />
+                <div className='Pages'>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={<Home />}
+                        />
+                        <Route
+                            path="/form"
+                            element={<QuoteForm />}
+                        />
+                        <Route
+                            path="/history"
+                            element={<History />}
+                        />
+                        <Route
+                            path="/profile"
+                            element={<ClientProfileManagement />}
+                        />
+                        <Route
+                            path="/login"
+                            element={<Login />}
+                        />
+                    </Routes>
+            
+                </div>
             </BrowserRouter>
         </div>
     );
 }
-
-=======
-import React from 'react';
-import './App.css';
-import LoginSignup from './components/LoginSignup/login';
-import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
-import History from './components/FuelQuoteHistory/fuelQuoteHistory';
-import FuelQuoteForm from './components/FuelQuoteForm/quoteForm'
-
-function App() {
-  return (
-    <div className="App">
-      <ClientProfileManagement />
-      {/* <LoginSignup /> */}
-      {/* <History /> */}
-      {/* <FuelQuoteForm /> */}
-    </div>
-  );
-}
->>>>>>> origin/new-main
 export default App;

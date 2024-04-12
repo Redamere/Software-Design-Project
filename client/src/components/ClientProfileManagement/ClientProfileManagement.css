@@ -1,133 +1,137 @@
 /* ClientProfileManagement.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-  
-  .sign-in-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smooth: never;
-  }
-  
-  h1, h2 {
-    font-family: inter;
-    margin-bottom: 10px;
-  }
-  
-  h1 {
-    margin-top: 4.7rem;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  h2 {
-    font-size: 14px;
-    font-weight: 400;
-    color: #636D7E;
-    margin-bottom: 2rem;
-  }
-  
-  .or-text {
-    font-family: inter;
-    font-size: 12px;
-    font-weight: 400;
-    color: #9DA6B6;
-  }
-  
-  .register-btn {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .or-text, .existing-account-text {
-    margin: 10px 0;
-  }
-  
-  .form-group {
-    font-family: inter;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: left;
-    margin-bottom: 10px;
-  }
-  
-  .form-group input {
-    border: 2px solid #EFF3F7;
-    border-radius: 4px;
-    height: 45px;
-  }
-  
-  .form-group input::placeholder{
-    color: #97A0AE;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .register-btn {
-    background-color: #2A73F0;
-    font-family: inter;
-    font-weight: 600;
-    font-size: 14px;
-    color: white;
-    height: 45px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .register-btn:hover {
-    background-color: #568ff1;
-  }
-  
-  .signup-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .rectangle {
-    width: 100px;
-    height: 1px;
-    background-color: #EAEFF5;
-  }
-  
-  .left-rectangle {
-    margin-right: 5px; /* Adjust the margin as needed */
-  }
-  
-  .right-rectangle {
-    margin-left: 5px; /* Adjust the margin as needed */
-  }
 
-  .form-group select {
-    border: 2px solid #EFF3F7;
-    border-radius: 4px;
-    height: 45px;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-family: inter;
-    font-size: 14px;
-    color: #636D7E;
-  }
-  
-  .form-group select option::placeholder {
-    color: #97A0AE;
-  }
+.sign-in-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* font-smooth: never; */
+}
+
+h1,
+h2 {
+  font-family: inter;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin-top: 4.7rem;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #636D7E;
+  margin-bottom: 2rem;
+}
+
+.or-text {
+  font-family: inter;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9DA6B6;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.or-text,
+.existing-account-text {
+  margin: 10px 0;
+}
+
+.form-group {
+  font-family: inter;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  border: 2px solid #EFF3F7;
+  border-radius: 4px;
+  height: 45px;
+}
+
+.form-group input::placeholder {
+  color: #97A0AE;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.register-btn {
+  background-color: #2A73F0;
+  font-family: inter;
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.register-btn:hover {
+  background-color: #568ff1;
+}
+
+.signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rectangle {
+  width: 100px;
+  height: 1px;
+  background-color: #EAEFF5;
+}
+
+.left-rectangle {
+  margin-right: 5px;
+  /* Adjust the margin as needed */
+}
+
+.right-rectangle {
+  margin-left: 5px;
+  /* Adjust the margin as needed */
+}
+
+.form-group select {
+  border: 2px solid #EFF3F7;
+  border-radius: 4px;
+  height: 45px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: inter;
+  font-size: 14px;
+  color: #636D7E;
+}
+
+.form-group select option::placeholder {
+  color: #97A0AE;
+}
