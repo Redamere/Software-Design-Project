@@ -8,10 +8,11 @@ const getForms = async(req, res) => {
 }
 
 const postQuoteForm = async (req, res) => {
-    let form = req.body
+    //address date gallons price
+    const {address, date, gallons, price}= req.body
 
     try {
-        let formResponse = await quoteForm.create(form)
+        const formResponse = await quoteForm.create(address, date, gallons, price)
         res.status(200).json(formResponse)
     } catch(error) {
         res.status(400).json({error: error.message})
@@ -112,7 +113,7 @@ const getQuoteForm = async (req, res) => {
 //     res.status(400).json(form)
 // }
 module.exports = {
-    getForms,
+    // getForms,
     postQuoteForm,
     getQuoteForm,
     // postGallons,

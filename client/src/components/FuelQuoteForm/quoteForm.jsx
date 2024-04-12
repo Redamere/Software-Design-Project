@@ -23,22 +23,24 @@ const [quoteForms, setQuoteForms] = useState('')
 
 
 
-useEffect(() => {
+// useEffect(() => {
 
-    const fetchQuoteForm = async () => {
-        const response = await fetch("/api/quoteForm")
-        const json = await response.json()
+//     const fetchQuoteForm = async () => {
+//         const response = await fetch("/api/quoteForm")
+//         const json = await response.json()
 
-        if (response.ok){
-            setQuoteForms(json)
-        }
-    }
-    fetchQuoteForm()
-}, [])
+//         if (response.ok){
+//             setQuoteForms(json)
+//             // console.log(json)
+//         }
+        
+//     }
+//     fetchQuoteForm()
+// }, [])
 
 const handleSubmit = async (e)=> {
   e.preventDefault
-  const quoteform = {gallons, date, address, price, due}
+  const quoteform = {gallons, date, address, price}
 
   const response = await fetch('/api/quoteForm' , 
   {
@@ -49,7 +51,7 @@ const handleSubmit = async (e)=> {
     }
   }) 
   const json = await response.json() 
-
+  console.log("got here")
   if (!response.ok){ //return the error if there is one
     setError(json.error)
   }
@@ -112,7 +114,7 @@ const handleSubmit = async (e)=> {
           <div className="grid-itemB">
             <form>
               <label htmlFor="deliveryAddress">Delivery Address</label>
-              <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" /> 
+              <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" onChange={(e)=>setAddress(e.target.value)} value={address}/> 
               <p>This is the delivery Address where your product will be delivered. (Address is default based on customer profile)</p>
               {/* <form action method="get"><button name="deliveryAddress" value="deliveryAddress" type="submit">Get My Address</button></form> */}
             </form>
@@ -121,7 +123,7 @@ const handleSubmit = async (e)=> {
           <div className="grid-itemB">
             <form>
               <label htmlFor="suggestedPrice">Suggested Price</label>
-              <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price"  /> 
+              <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e)=>setPrice(e.target.value)} value={price} /> 
               <p>This is the suggested price per gallon of your product, automatically calculated</p>
               {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
             </form>
