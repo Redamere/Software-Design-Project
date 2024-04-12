@@ -9,7 +9,7 @@
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-smooth: never;
+    /* font-smooth: never; */
   }
   
   h1, h2 {
