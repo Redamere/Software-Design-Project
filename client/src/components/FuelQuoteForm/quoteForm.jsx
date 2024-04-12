@@ -39,8 +39,8 @@ const [quoteForms, setQuoteForms] = useState('')
 // }, [])
 
 const handleSubmit = async (e)=> {
-  e.preventDefault
-  const quoteform = {gallons, date, address, price}
+  // e.preventDefault
+  const quoteform = {address, date, gallons, price}
 
   const response = await fetch('/api/quoteForm' , 
   {
@@ -56,11 +56,11 @@ const handleSubmit = async (e)=> {
     setError(json.error)
   }
   if (response.ok){
-    setGallons('')
-    setDate('')
-    setAddress('')
-    setPrice('')
-    setDue('')
+    // setGallons('')
+    // setDate('')
+    // setAddress('')
+    // setPrice('')
+    // setDue('')
     setError(null)
     console.log("New Form Created", json)
   }
