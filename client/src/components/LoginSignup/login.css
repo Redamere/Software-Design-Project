@@ -2,13 +2,13 @@
 
 .signup-page {
     font-family: 'Inter', sans-serif;
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    background: #D1F5FF; /* Set background color */
+    margin: 0;
+    padding: 0; 
+    background: #D1F5FF; 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Make the container full height of the viewport */
+    height: 100vh; 
 }
 
 .container {

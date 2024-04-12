@@ -14,7 +14,14 @@
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "mongodb": "^6.5.0",
+<<<<<<< Updated upstream
     "mongoose": "^8.2.3"
+=======
+    "mongodb-memory-server": "^9.1.8",
+    "mongoose": "^8.3.0",
+    "react-router-dom": "^6.22.3",
+    "web-vitals": "^3.5.2"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "jest": "^29.7.0",
