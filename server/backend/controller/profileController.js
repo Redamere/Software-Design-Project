@@ -9,21 +9,21 @@ const getProfiles = async (req, res) => {
 }
 
 // get a single profile
-const getProfile = async (req, res) => {
-    const { id } = req.params
+// const getProfile = async (req, res) => {
+//     const { id } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(404).json({ error: 'Profile not found' })
-    }
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//         res.status(404).json({ error: 'Profile not found' })
+//     }
 
-    const profile = await Profile.findById(id)
+//     const profile = await Profile.findById(id)
 
-    if (!profile) {
-        res.status(404).json({ error: 'Profile not found' })
-    }
+//     if (!profile) {
+//         res.status(404).json({ error: 'Profile not found' })
+//     }
 
-    res.status(200).json(profile)
-}
+//     res.status(200).json(profile)
+// }
 
 // create a new profile
 const createProfile = async (req, res) => {
@@ -39,46 +39,46 @@ const createProfile = async (req, res) => {
 }
 
 // delete a profile
-const deleteProfile = async (req, res) => {
-    const { id } = req.params
+// const deleteProfile = async (req, res) => {
+//     const { id } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(404).json({ error: 'Profile not found' })
-    }
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//         res.status(404).json({ error: 'Profile not found' })
+//     }
 
-    const profile = await Profile.findOneAndDelete({ _id: id })
+//     const profile = await Profile.findOneAndDelete({ _id: id })
 
-    if (!profile) {
-        res.status(404).json({ error: 'Profile not found' })
-    }
+//     if (!profile) {
+//         res.status(404).json({ error: 'Profile not found' })
+//     }
 
-    res.status(200).json({ profile })
-}
+//     res.status(200).json({ profile })
+// }
 
 // update a profile
-const updateProfile = async (req, res) => {
-    const { id } = req.params
-    const { fullName, address1, address2, city, state, zipcode } = req.body
+// const updateProfile = async (req, res) => {
+//     const { id } = req.params
+//     const { fullName, address1, address2, city, state, zipcode } = req.body
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(404).json({ error: 'Profile not found' })
-    }
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//         res.status(404).json({ error: 'Profile not found' })
+//     }
 
-    const profile = await Profile.findOneAndUpdate({ _id: id }, {
-        ...req.body
-    })
+//     const profile = await Profile.findOneAndUpdate({ _id: id }, {
+//         ...req.body
+//     })
 
-    if (!profile) {
-        res.status(400).json({ error: 'Profile not found' })
-    }
+//     if (!profile) {
+//         res.status(400).json({ error: 'Profile not found' })
+//     }
 
-    res.status(200).json({ profile })
-}
+//     res.status(200).json({ profile })
+// }
 
 module.exports = {
     getProfiles,
-    getProfile,
+    // getProfile,
     createProfile,
-    deleteProfile,
-    updateProfile
+    // deleteProfile,
+    // updateProfile
 }

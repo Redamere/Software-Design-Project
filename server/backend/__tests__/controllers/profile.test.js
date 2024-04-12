@@ -114,10 +114,81 @@ describe('createProfile', () => {
     // Call createProfile function
     await ProfileController.createProfile(req, res);
   
-    // Check if response status is 400
+    // Check if response status is 200
     expect(res.status).toHaveBeenCalledWith(200);
   });
-  
+
+  it('should return status 400 when there is an error', async () => {
+    // Mock data for request body
+    const newProfileData = {
+      fullName: 'Mary Jane',
+      address1: '1234 Street Ave',
+      city: 'Dallas',
+      state: 'TX',
+      zipcode: '20402'
+    };
+
+    // Mock Profile.create to reject with an error
+    const errorMessage = 'Database error';
+    Profile.create.mockRejectedValue(new Error(errorMessage));
+
+    // Mock request object
+    const req = { body: newProfileData };
+
+    // Mock response object
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    // Call createProfile function
+    await ProfileController.createProfile(req, res);
+
+    // Check if Profile.create was called with the correct arguments
+    expect(Profile.create).toHaveBeenCalledWith(newProfileData);
+
+    // Check if response status is 400
+    expect(res.status).toHaveBeenCalledWith(400);
+
+    // Check if response JSON includes the error message
+    expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+  });
+
 
   // Add more tests for edge cases if needed
+});
+
+describe('getProfiles', () => {
+  it('should return profiles with status 200', async () => {
+    // Mock data for profiles
+    const mockProfiles = [
+      { _id: '1', fullName: 'John Doe' },
+      { _id: '2', fullName: 'Jane Smith' },
+    ];
+
+    // Mock Profile.find to resolve with mock profiles
+    Profile.find.mockReturnValue({ sort: jest.fn().mockReturnValueOnce(mockProfiles) });
+
+    // Mock request and response objects
+    const req = {};
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    // Call getProfiles function
+    await ProfileController.getProfiles(req, res);
+
+    // Check if Profile.find was called with the correct arguments
+    expect(Profile.find).toHaveBeenCalledWith({});
+
+    // Check if sort was called
+    expect(Profile.find().sort).toHaveBeenCalledWith({ createdAt: -1 });
+
+    // Check if response status is 200
+    expect(res.status).toHaveBeenCalledWith(200);
+
+    // Check if response JSON includes the profiles
+    expect(res.json).toHaveBeenCalledWith(mockProfiles);
+  });
 });
