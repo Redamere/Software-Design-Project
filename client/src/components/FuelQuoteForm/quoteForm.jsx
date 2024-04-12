@@ -39,7 +39,7 @@ const [quoteForms, setQuoteForms] = useState('')
 // }, [])
 
 const handleSubmit = async (e)=> {
-  e.preventDefault
+  e.preventDefault()
   const quoteform = {gallons, date, address, price}
 
   const response = await fetch('/api/quoteForm' , 
