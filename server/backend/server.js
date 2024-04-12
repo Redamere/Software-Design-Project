@@ -5,6 +5,9 @@ const quoteHistory = require("./routes/quoteHistory")
 const express = require("express")
 const mongoose = require("mongoose")
 const router = require("./routes/QuoteForm")
+const profileRoutes = require("./routes/profiles")
+const signup = require("./routes/signup")
+const login = require("./routes/login")
 
 
 //express app

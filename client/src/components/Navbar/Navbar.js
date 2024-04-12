@@ -8,6 +8,7 @@ export default function Navbar() {
             <li><a href="/form">Quote Form</a></li>
             <li><a href="/history">Quote History</a></li>
             <li><a href="/profile">Profile</a></li>
+            <li><a href="/login">Login</a></li>
         </ul>
     </nav>
 }
