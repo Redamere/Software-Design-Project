@@ -7,7 +7,6 @@ const QuoteHistoryDetails = ({ quoteHistory }) => {
             <td>{quoteHistory.FormDate}</td>
             <td>{quoteHistory.FormPrice}</td>
             {/* <td>{quoteHistory.TotalPrice}</td> */}
-            {/* <td>250</td> */}
         </tr>
     )
 }
