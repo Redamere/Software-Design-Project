@@ -8,10 +8,18 @@ const mongoose = require("mongoose")
 // }
 
 const postQuoteForm = async (req, res) => {
-    let form = req.body
+    //address date gallons price
+    const {address, date, gallons, price}= req.body
 
+   
     try {
-        let formResponse = await quoteForm.create(form)
+        // Create a new document using the quoteForm model
+        const formResponse = await quoteForm.create({
+            FormAddress: address,
+            FormDate: date,
+            FormGallons: gallons,
+            FormPrice: price
+        });
         res.status(200).json(formResponse)
     } catch (error) {
         res.status(400).json({ error: error.message })

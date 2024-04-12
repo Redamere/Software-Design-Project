@@ -5,7 +5,7 @@ import './quoteForm.css';
 import { useEffect, useState } from 'react'
 
 //components
-import FormDetails from './formDetails.jsx';
+import FormDetails from './formDetails';
 //import QuoteForm from "./components/FuelQuoteForm/quoteForm"
 
 //documentation
@@ -23,58 +23,49 @@ const QuoteForm = () => {
 
 
 
-//useEffect function 
-  useEffect(() => {
-    //async function to fetch quote from data from the API.
-    const fetchQuoteForm = async () => {
-      // await a response from the API
-      const response = await fetch("/api/quoteForm")
-      //turn the response into a JSON file
-      const json = await response.json()
-      // Check if the response is sucesssful. 
-      if (response.ok) {
-      // If successful, set the quoteForms variable to the response from the API
-        setQuoteForms(json)
-      }
+
+// useEffect(() => {
+
+//     const fetchQuoteForm = async () => {
+//         const response = await fetch("/api/quoteForm")
+//         const json = await response.json()
+
+//         if (response.ok){
+//             setQuoteForms(json)
+//             // console.log(json)
+//         }
+        
+//     }
+//     fetchQuoteForm()
+// }, [])
+
+const handleSubmit = async (e)=> {
+  e.preventDefault
+  const quoteform = {address, date, gallons, price}
+
+  const response = await fetch('/api/quoteForm' , 
+  {
+    method: "POST",
+    body: JSON.stringify(quoteform), 
+    headers: {
+      'Content-type': 'application/json'
     }
-    // Call the fetchQuoteForm function when the component mounts
-    fetchQuoteForm()
-  }, [])
-
-
-  //function to that calls when the submit button is hit
-  const handleSubmit = async (e) => {
-    e.preventDefault // allows the form refresh, prevents default form submission 
-    // create an object to hold quote form information
-    const quoteform = { gallons, date, address, price, due }
-
-    // Send a POST request to the API with the data from the submission
-    const response = await fetch('/api/quoteForm',
-      {
-        method: "POST", //specifies the HTTP method to be post 
-        body: JSON.stringify(quoteform), //convert the form data into a JSON string
-        headers: {
-          'Content-type': 'application/json' //set the request header to specify JSON content
-        }
-      })
-
-      //Parse the JSON response
-    const json = await response.json()
-
-    
-    if (!response.ok) { //return the error if there is one
-      setError(json.error)
-    }
-    if (response.ok) { //If response is successful, clear the field varialbes
-      setGallons('')
-      setDate('')
-      setAddress('')
-      setPrice('')
-      setDue('')
-      setError(null)
-      console.log("New Form Created", json)
-    }
+  }) 
+  const json = await response.json() 
+  console.log("got here")
+  if (!response.ok){ //return the error if there is one
+    setError(json.error)
   }
+  if (response.ok){
+    // setGallons('')
+    // setDate('')
+    // setAddress('')
+    // setPrice('')
+    // setDue('')
+    setError(null)
+    console.log("New Form Created", json)
+  }
+}
 
   return (
     <div>
@@ -120,24 +111,24 @@ const QuoteForm = () => {
           </div>
 
 
-          <div className="grid-containerD">
-            <div className="grid-itemB">
-              <form>
-                <label htmlFor="deliveryAddress">Delivery Address</label>
-                <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" />
-                <p>This is the delivery Address where your product will be delivered. (Address is default based on customer profile)</p>
-                {/* <form action method="get"><button name="deliveryAddress" value="deliveryAddress" type="submit">Get My Address</button></form> */}
-              </form>
-            </div>
+        <div className="grid-containerD">
+          <div className="grid-itemB">
+            <form>
+              <label htmlFor="deliveryAddress">Delivery Address</label>
+              <input type="text" name="deliveryAddress" id="deliveryAddress" placeholder="Your delivery address" onChange={(e)=>setAddress(e.target.value)} value={address}/> 
+              <p>This is the delivery Address where your product will be delivered. (Address is default based on customer profile)</p>
+              {/* <form action method="get"><button name="deliveryAddress" value="deliveryAddress" type="submit">Get My Address</button></form> */}
+            </form>
+          </div>
 
-            <div className="grid-itemB">
-              <form>
-                <label htmlFor="suggestedPrice">Suggested Price</label>
-                <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" />
-                <p>This is the suggested price per gallon of your product, automatically calculated</p>
-                {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
-              </form>
-            </div>
+          <div className="grid-itemB">
+            <form>
+              <label htmlFor="suggestedPrice">Suggested Price</label>
+              <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e)=>setPrice(e.target.value)} value={price} /> 
+              <p>This is the suggested price per gallon of your product, automatically calculated</p>
+              {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
+            </form>
+          </div>
 
             <div className="grid-itemB">
               {/* <h2 style="text-align: left;">Total Amount Due</h2> */}

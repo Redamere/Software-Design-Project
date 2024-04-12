@@ -1,6 +1,6 @@
 const express = require('express')
-const {
-    getForms,
+const { 
+    // getForms,
     postQuoteForm,
     // getQuoteForm,
     // postGallons,
@@ -18,7 +18,7 @@ const router = express.Router()
 //res is used to send back the desired HTTP response
 
 //get all forms (for testing purposes)
-//router.get("/", getForms)
+// router.get("/", getForms)
 
 //post new quote form
 //router.post("/", postQuoteForm)
