@@ -4,6 +4,8 @@ import './fuelQuoteHistory.css'
 
 // components
 import QuoteHistoryDetails from './quoteHistoryDetails'
+// import FormDetails from '../formDetails';
+import FormDetails from '../FuelQuoteForm/formDetails';
 
 const History = () => {
 
@@ -11,7 +13,7 @@ const History = () => {
 
     useEffect(() => {
         const fetchQuotes = async () => {
-            const response = await fetch('/api/quoteHistory')
+            const response = await fetch('/api/quoteForm')
             const json = await response.json()
 
             if (response.ok) {
@@ -35,7 +37,7 @@ const History = () => {
                         <th>Delivery Address</th>
                         <th>Delivery Date</th>
                         <th>Suggested Price / gallon</th>
-                        {/* <th>Total Amount Due</th> */}
+                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody>

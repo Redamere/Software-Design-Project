@@ -35,6 +35,12 @@ const getQuoteForm = async (req, res) => {
     }
 }
 
+const allQuotes = async (req, res) => {
+    const allQuotes = await quoteForm.find({}).sort({ createdAt: -1 })
+
+    res.status(200).json(allQuotes)
+}
+
 
 
 
@@ -140,6 +146,7 @@ module.exports = {
     // getForms,
     postQuoteForm,
     getQuoteForm,
+    allQuotes
     // postGallons,
     // getGallons,
     // postDeliveryAddress,
