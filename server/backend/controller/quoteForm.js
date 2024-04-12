@@ -10,7 +10,6 @@ const getForms = async(req, res) => {
 const postQuoteForm = async (req, res) => {
     //address date gallons price
     const {address, date, gallons, price}= req.body
-
    
     try {
         // Create a new document using the quoteForm model
@@ -31,7 +30,7 @@ const getQuoteForm = async (req, res) => {
     let quoteRequest = await quoteForm.findById(id)
     res.status(200).json(quoteRequest)
     if (!quoteRequest){
-        return res.stats(404).json({error: "Could not find this form"})
+        return res.status(404).json({error: "Could not find this form"})
     }
 }
 
