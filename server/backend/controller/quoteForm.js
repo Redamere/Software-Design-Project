@@ -11,8 +11,15 @@ const postQuoteForm = async (req, res) => {
     //address date gallons price
     const {address, date, gallons, price}= req.body
 
+   
     try {
-        const formResponse = await quoteForm.create(address, date, gallons, price)
+        // Create a new document using the quoteForm model
+        const formResponse = await quoteForm.create({
+            FormAddress: address,
+            FormDate: date,
+            FormGallons: gallons,
+            FormPrice: price
+        });
         res.status(200).json(formResponse)
     } catch(error) {
         res.status(400).json({error: error.message})
