@@ -1,4 +1,5 @@
 const Profile = require('../models/profileModel')
+const Pricing = require('../models/pricingModel')
 const mongoose = require('mongoose')
 
 // get all profiles
@@ -48,6 +49,7 @@ const createProfile = async (req, res) => {
 
 // edit a user's profile
 const editProfile = async (req, res) => {
+    console.log("here");
     const { fullName, address1, address2, city, state, zipcode, user_id } = req.body
 
     try {

@@ -2,14 +2,8 @@ const express = require('express')
 const { 
     getForms,
     postQuoteForm,
-    getUserQuoteForms
-    // postGallons,
-    // postDeliveryAddress,
-    // getDeliveryAddress,
-    // getSuggestedPrice,
-    // postSuggestedPrice,
-    // postFullForm,
-    // getFullForm
+    getUserQuoteForms,
+    calculateFuelQuote
 } = require("../controller/quoteForm")
 
 const router = express.Router()
@@ -24,6 +18,8 @@ router.get("/", getForms)
 router.post("/", postQuoteForm)
 
 router.get("/:id", getUserQuoteForms)
+
+router.post("/calculate", calculateFuelQuote)
 
 //post gallons given by user
 // router.get("/:id", postGallons)
