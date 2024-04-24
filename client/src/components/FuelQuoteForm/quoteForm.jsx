@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react'
 
 //components
 import FormDetails from './formDetails';
-//import QuoteForm from "./components/FuelQuoteForm/quoteForm"
+priceModule = require("./pricingModule")
 
-//documentation
+//documentations
 
 
 const QuoteForm = () => {
@@ -35,7 +35,7 @@ const QuoteForm = () => {
     }
     fetchQuoteForm()
   }, [])
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
 
