@@ -122,7 +122,7 @@ const QuoteForm = () => {
             <div className="grid-itemB">
               <form>
                 <label htmlFor="suggestedPrice">Suggested Price</label>
-                <input type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e) => setPrice(e.target.value)} value={price} />
+                <input readOnly type="text" name="suggestedPrice" id="suggestedPrice" placeholder="Your suggested price" onChange={(e) => setPrice(e.target.value)} value={price} />
                 <p>This is the suggested price per gallon of your product, automatically calculated</p>
                 {/* <form action method="get"><button name="getPrice" value="getPrice" type="submit">Calculate Suggested Price</button></form> */}
               </form>
@@ -138,7 +138,8 @@ const QuoteForm = () => {
               </form>
             </div>
           </div>
-          <button type="submit">Submit Form</button>
+          <button type="button">Submit Form</button>
+          <button type="button" /*onClick={handleGetQuote}*/>Get Quote</button>
         </form>
 
 
