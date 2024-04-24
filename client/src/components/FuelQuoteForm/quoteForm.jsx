@@ -1,5 +1,6 @@
 import React from 'react';
 import './quoteForm.css';
+import './pricingModule'
 
 // const router = require("./routes/QuoteForm")
 import { useEffect, useState } from 'react'
@@ -35,7 +36,7 @@ const QuoteForm = () => {
     }
     fetchQuoteForm()
   }, [])
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
 
@@ -139,7 +140,7 @@ const QuoteForm = () => {
             </div>
           </div>
           <button type="button">Submit Form</button>
-          <button type="button" /*onClick={handleGetQuote}*/>Get Quote</button>
+          <button type="button" /*onClick={handleGetQuote} */>Get Quote</button>
         </form>
 
 
