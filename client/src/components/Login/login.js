@@ -32,7 +32,7 @@ const LogIn = () => {
         console.log('Login Successful');
         
         // Redirect to client-profile-management upon successful login
-        // window.location.href = '/profile';
+        window.location.href = '/';
       }
     } catch (error) {
       console.error('Error:', error);
