@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //pages
 import QuoteForm from "./components/FuelQuoteForm/quoteForm"
-import Login from './components/LoginSignup/login';
+import Login from './components/Login/login';
 import History from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import Signup from './components/Signup/signup';
 import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
-
 
 function App() {
     return (
@@ -36,6 +36,10 @@ function App() {
                         <Route
                             path="/login"
                             element={<Login />}
+                        />
+                        <Route
+                            path="/signup"
+                            element={<Signup />}
                         />
                     </Routes>
             

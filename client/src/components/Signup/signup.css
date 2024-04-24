@@ -1,0 +1,152 @@
+/* LogIn.css */
+
+.body-container {
+    /* Font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+  }
+  
+  .sign-in-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+  }
+  
+  h1, h2 {
+    font-family: inter;
+    margin-bottom: 5px;
+  }
+  
+  h1 {
+    margin-top: 4.7rem;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  h2 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #636D7E;
+  }
+  
+  .or-text {
+    font-family: inter;
+    font-size: 12px;
+    font-weight: 400;
+    color: #9DA6B6;
+  }
+  
+  .linkedin-btn, .google-btn, .register-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .or-text, .existing-account-text {
+    margin: 10px 0;
+  }
+  
+  .form-group {
+    font-family: inter;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .form-group input {
+    border: 2px solid #EFF3F7;
+    border-radius: 4px;
+    height: 45px;
+  }
+  
+  .form-group input::placeholder{
+    color: #97A0AE;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .register-btn {
+    background-color: #2A73F0;
+    font-family: inter;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .register-btn:hover {
+    background-color: #568ff1;
+  }
+  
+  .google-btn, .linkedin-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid #EFF3F7;
+    border-radius: 4px;
+    height: 45px;
+  }
+  
+  .google-btn:hover, .linkedin-btn:hover {
+    background-color: #EFEEEC;
+  }
+  
+  .signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* SignUp.css */
+  .rectangle {
+    width: 100px;
+    height: 1px;
+    background-color: #EAEFF5;
+  }
+  
+  .left-rectangle {
+    margin-right: 5px; /* Adjust the margin as needed */
+  }
+  
+  .right-rectangle {
+    margin-left: 5px; /* Adjust the margin as needed */
+  }
+  
+  .existing-account-text {
+    font-family: inter;
+    color: #2A70E7;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .smalllogo {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    margin-right: 15px; /* Adjust the margin as needed */
+  }

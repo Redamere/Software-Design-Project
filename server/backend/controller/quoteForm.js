@@ -1,7 +1,7 @@
 const quoteForm = require("../models/quoteFormModels")
 const mongoose = require("mongoose")
 
-//get all forms
+// get all forms
 const getForms = async(req, res) => {
     const forms = await quoteForm.find({}).sort({createdAt: -1})
     res.status(200).json(forms)
@@ -9,7 +9,7 @@ const getForms = async(req, res) => {
 
 const postQuoteForm = async (req, res) => {
     //address date gallons price
-    const {address, date, gallons, price}= req.body
+    const { address, date, gallons, price, user_id }= req.body
    
     try {
         // Create a new document using the quoteForm model
@@ -17,7 +17,8 @@ const postQuoteForm = async (req, res) => {
             FormAddress: address,
             FormDate: date,
             FormGallons: gallons,
-            FormPrice: price
+            FormPrice: price,
+            user_id
         });
         res.status(200).json(formResponse)
     } catch(error) {
@@ -31,6 +32,21 @@ const getQuoteForm = async (req, res) => {
     res.status(200).json(quoteRequest)
     if (!quoteRequest){
         return res.status(404).json({error: "Could not find this form"})
+    }
+}
+
+
+const getUserQuoteForms = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const forms = await quoteForm
+            .find({ user_id: id })
+            .sort({createdAt: -1})
+        res.status(200).json(forms)
+        
+    } catch (error) {
+        return res.status(400).json({ error: error.message })
     }
 }
 
@@ -122,6 +138,7 @@ module.exports = {
     getForms,
     postQuoteForm,
     getQuoteForm,
+    getUserQuoteForms,
     // postGallons,
     // getGallons,
     // postDeliveryAddress,

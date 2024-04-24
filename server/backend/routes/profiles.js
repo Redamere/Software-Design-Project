@@ -2,21 +2,23 @@ const express = require('express')
 const {
     createProfile,
     getProfiles,
-    // getProfile,
+    getUserProfile,
+    editProfile
     // deleteProfile,
     // updateProfile
 } = require('../controller/profileController')
 
 const router = express.Router()
-
-// GET all profiles
 router.get('/', getProfiles)
 
-// GET a single profile
-// router.get('/:id', getProfile)
+// GET all profiles
+router.get('/:id', getUserProfile)
 
 // POST a new profile
 router.post('/', createProfile)
+
+// EDIT a profile
+router.patch('/', editProfile)
 
 // DELETE a profile
 // router.delete('/:id', deleteProfile)

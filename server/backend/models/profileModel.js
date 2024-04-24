@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const profileSchema = new Schema({
+    user_id: {
+        type: String,
+        required: true
+    },
     fullName: {
         type: String,
         required: [true, 'Full name is required'],

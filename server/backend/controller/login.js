@@ -7,7 +7,6 @@ const loginUser = async (req, res) => {
     return res.status(400).json({ message: 'Username and password are required' });
   }
 
-
   try {
     // Find user by username in the database
     const user = await User.findOne({ username });
@@ -22,7 +21,7 @@ const loginUser = async (req, res) => {
     }
 
     // Password is correct, login successful
-    res.status(200).json({ message: 'Login Successful' });
+    res.status(200).json({ message: 'Login Successful', _id: user._id });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal Server Error' });

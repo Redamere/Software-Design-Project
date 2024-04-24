@@ -14,10 +14,6 @@
     /* Center align the caption */
 }
 
-body {
-    background: linear-gradient(90deg, #B19CD9, lightblue);
-}
-
 .table {
     width: 100%;
     border-collapse: collapse;

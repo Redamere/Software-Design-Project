@@ -19,28 +19,30 @@ const QuoteForm = () => {
   const [due, setDue] = useState('')
   const [error, setError] = useState('')
   const [quoteForms, setQuoteForms] = useState('')
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
 
-    const fetchQuoteForm = async () => {
-      const response = await fetch("/api/quoteForm")
-      const json = await response.json()
-
-      if (response.ok) {
-        console.log("hello")
-        setQuoteForms(json)
-        // console.log(json)
+    const getUserIdFromCookie = () => {
+      const cookies = document.cookie.split('; ');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.split('=');
+        if (name === 'userId') {
+          setUserId(value);
+          console.log('userId:', value);
+          break;
+        }
       }
-      console.log("bye")
-    }
-    fetchQuoteForm()
+    };
+
+    getUserIdFromCookie()
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
-
-    const quoteform = { address, date, gallons, price };
-
+  
+    const quoteform = { address, date, gallons, price, user_id: userId };
+  
     const response = await fetch('/api/quoteForm', {
       method: "POST",
       body: JSON.stringify(quoteform),
@@ -63,7 +65,7 @@ const QuoteForm = () => {
       console.log("New Form Created", json);
     }
   }
-
+  
 
   return (
     <div>

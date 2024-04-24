@@ -2,7 +2,7 @@ const express = require('express')
 const { 
     getForms,
     postQuoteForm,
-    getQuoteForm,
+    getUserQuoteForms
     // postGallons,
     // postDeliveryAddress,
     // getDeliveryAddress,
@@ -23,8 +23,7 @@ router.get("/", getForms)
 //post new quote form
 router.post("/", postQuoteForm)
 
-//get quote form 
-router.get("/:id", getQuoteForm)
+router.get("/:id", getUserQuoteForms)
 
 //post gallons given by user
 // router.get("/:id", postGallons)

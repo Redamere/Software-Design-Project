@@ -17,16 +17,6 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
         minlength: [2, 'Password must be at least 6 characters long']
-    },
-    confirmPassword: {
-        type: String,
-        required: [true, 'Confirm Password is required'],
-        validate: {
-            validator: function(value) {
-                return value === this.password;
-            },
-            message: 'Passwords do not match'
-        }
     }
 });
 
@@ -37,9 +27,5 @@ userSchema.pre('save', async function(next) {
     user.password = hashedPassword;
     next();
 });
-
-
-
-
 
 module.exports = mongoose.model('User', userSchema);

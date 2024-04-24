@@ -3,6 +3,10 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const quoteFormSchema = new Schema({
+    user_id: {
+        type: String,
+        required: true
+    },
     FormAddress: {
         type: String,
         required: [true, 'Address is required'],

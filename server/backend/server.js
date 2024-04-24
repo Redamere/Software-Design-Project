@@ -1,9 +1,9 @@
 require("dotenv").config()
 
-const quoteForm = require("./routes/QuoteForm")
-const quoteHistory = require("./routes/quoteHistory")
 const express = require("express")
 const mongoose = require("mongoose")
+
+const quoteForm = require("./routes/quoteForm")
 const profileRoutes = require("./routes/profiles")
 const signup = require("./routes/signup")
 const login = require("./routes/login")
@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 })
 
 // routes (Must use double quotes ("") instead of single quotes? (''))
-app.use("/api/quoteForm", quoteForm)
-app.use('/api/profile', profileRoutes)
+app.use("/api/quoteForm/", quoteForm)
+app.use('/api/profile/', profileRoutes)
 app.use('/api/signup', signup)
 app.use('/api/login', login)
 

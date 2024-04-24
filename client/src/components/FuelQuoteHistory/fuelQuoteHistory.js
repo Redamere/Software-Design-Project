@@ -9,21 +9,32 @@ import QuoteHistoryDetails from './quoteHistoryDetails'
 
 const History = () => {
 
-    const [quotes, setQuotes] = useState(null)
+    const [quotes, setQuotes] = useState(null);
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        const fetchQuotes = async () => {
-            const response = await fetch('/api/quoteForm')
-            const json = await response.json()
-
-            if (response.ok) {
-                setQuotes(json)
-                console.log(response)
+        const getUserIdFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.split('=');
+                if (name === 'userId') {
+                    setUserId(value);
+                    break;
+                }
             }
-        }
+        };
 
-        fetchQuotes()
-    }, [])
+        const fetchQuotes = async () => {
+            getUserIdFromCookie();
+            if (userId) {
+                const response = await fetch(`/api/quoteForm/${userId}`);
+                const data = await response.json();
+                setQuotes(data);
+            }
+        };
+
+        fetchQuotes();
+    }, [userId]);
 
     return (
         <div className="container">
