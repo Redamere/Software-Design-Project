@@ -1,46 +1,89 @@
-* {
-    box-sizing: border-box;
-}
+/* Navbar.css */
 
-body {
-    margin: 0;
-}
-
-.nav {
-    background-color: #5E4D80;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 2rem;
-    padding: 0 1rem;
-}
-
-.site-title {
-    font-size: 2rem;
-}
-
-.nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-}
-
-.nav a {
-    color: inherit;
-    text-decoration: none;
-    height: 100%;
+html {
+    font-size: 0.95rem
+  }
+  
+  .main-header {
     display: flex;
     align-items: center;
-    padding: .25rem;
-}
-
-/* .nav li.active {
-    background-color: #555;
-} */
-
-.nav li:hover {
-    background-color: #777;
-}
+    /* OLD PADDING: 0.75rem 2.5rem */
+    padding: 1.25rem 2.5rem; /* Equivalent to 16px 32px */
+    background-color: #fff; /* Set your desired background color */
+  }
+  
+  .logo {
+    margin-left: 12rem; /* old: 3.1rem */
+    margin-right: 1.4rem;
+    max-width: 100%;
+    height: 2rem;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    gap: 0; /* Add some gap between the logo and nav-buttons */
+    align-items: center;
+  }
+  
+  .nav-button,
+  .login-button,
+  .signin-button {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1.25rem; /* Adjusted padding: Equivalent to 12px 20px */
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 0.95rem; /* Equivalent to 16px */
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+    border-radius: 4px; /* Add rounded corners */
+  }
+  
+  .nav-button:hover,
+  .login-button:hover {
+    background-color: #f5f5f5; /* Color when hovered */
+  }
+  
+  .signin-button:hover {
+    background-color: #4287FC; /* Color when hovered */
+  }
+  
+  .auth-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 0.625rem; /* Equivalent to 10px */
+  }
+  
+  
+  .signin-button {
+    margin-right: 12rem; /* Equivalent to 59px */
+    background-color: #2a73f0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border-radius: 4px; /* Add rounded corners */
+    padding: 0rem 0.75rem;
+  }
+  
+  .pfp {
+    margin-right: 12rem; /* Equivalent to 59px */
+    background: none;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    
+    border-radius: 100%;
+  
+    height: 32px;
+    width: 32px;
+  }
+  
+  .login-button {
+    margin-right: 0.25rem; /* Equivalent to 10px */
+  }
+  
+  
