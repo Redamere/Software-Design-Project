@@ -16,39 +16,39 @@ describe('loginUser', () => {
             username: 'john_doe',
             password: 'password123',
         };
-
+    
         const userFromDatabase = {
             _id: 'userId',
             username: 'john_doe',
             password: await bcrypt.hash('password123', 10) // Simulate hashed password in database
         };
-
+    
         // Mock User.findOne to resolve with userFromDatabase
         User.findOne.mockResolvedValue(userFromDatabase);
-
+    
         // Mock bcrypt.compare to resolve with true
         bcrypt.compare.mockResolvedValue(true);
-
+    
         const req = { body: userData };
         const res = {
             status: jest.fn().mockReturnThis(),
             json: jest.fn(),
         };
-
-        // Call the loginUser function from the UserController
-        await UserController.loginUser(req, res);
-
+    
+        // Call the login function from the UserController (renamed from loginUser)
+        await UserController.loginUser(req, res); // Change 'loginUser' to 'login'
+    
         // Assert that User.findOne was called with userData.username
         expect(User.findOne).toHaveBeenCalledWith({ username: userData.username });
-
+    
         // Assert that bcrypt.compare was called with userData.password and userFromDatabase.password
         expect(bcrypt.compare).toHaveBeenCalledWith(userData.password, userFromDatabase.password);
-
+    
         // Assert that response status was set to 200
         expect(res.status).toHaveBeenCalledWith(200);
-
-        // Assert that response json was called with success message
-        expect(res.json).toHaveBeenCalledWith({ message: 'Login Successful' });
+    
+        // Assert that response json was called with the expected message and _id
+        expect(res.json).toHaveBeenCalledWith({ message: 'Login Successful', _id: userFromDatabase._id });
     });
 
     it('should return 401 if user does not exist', async () => {

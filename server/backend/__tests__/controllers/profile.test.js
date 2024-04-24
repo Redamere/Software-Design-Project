@@ -1,194 +1,179 @@
-const ProfileController = require('../../controller/profileController')
 const Profile = require('../../models/profileModel');
+const {
+    getProfiles,
+    getUserProfile,
+    createProfile,
+    editProfile
+} = require('../../controller/profileController');
 
-jest.mock('../../models/profileModel'); // Mock Profile model
+jest.mock('../../models/profileModel', () => ({
+    find: jest.fn(),
+    findOne: jest.fn(),
+    create: jest.fn(),
+    findOneAndUpdate: jest.fn(),
+}));
 
-describe('createProfile', () => {
-  beforeEach(() => {
-    jest.clearAllMocks(); // Clear all mocked functions before each test
-  });
+describe('Profile Controller', () => {
+    let req, res;
 
-  it('should create a new profile with status 200', async () => {
-    // Mock data for request body
-    const newProfileData = {
-      fullName: 'John Doe',
-      address1: '123 Main St',
-      address2: 'Apt 101',
-      city: 'New York',
-      state: 'NY',
-      zipcode: '10001'
-    };
+    beforeEach(() => {
+        req = {
+            body: {},
+            params: {},
+        };
+        res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+        };
+    });
 
-    // Mock data for created profile
-    const createdProfile = {
-      _id: 'profileId',
-      ...newProfileData
-    };
+    afterEach(() => {
+        jest.clearAllMocks(); // Clear all mock calls between tests
+    });
 
-    // Mock Profile.create to resolve with created profile
-    Profile.create.mockResolvedValue(createdProfile);
+    describe('getProfiles', () => {
+        it('should return all profiles', async () => {
+            const profiles = [{ fullName: 'John Doe' }, { fullName: 'Jane Doe' }];
+            Profile.find.mockResolvedValueOnce(profiles);
 
-    // Mock request object
-    const req = { body: newProfileData };
+            await getProfiles(req, res);
 
-    // Mock response object
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+            expect(Profile.find).toHaveBeenCalled();
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ profiles });
+        });
 
-    // Call createProfile function
-    await ProfileController.createProfile(req, res);
+        it('should handle errors', async () => {
+            const errorMessage = 'Internal Server Error';
+            Profile.find.mockRejectedValueOnce(new Error(errorMessage));
 
-    // Check if Profile.create was called with the correct arguments
-    expect(Profile.create).toHaveBeenCalledWith(newProfileData);
+            await getProfiles(req, res);
 
-    // Check if response status is 200
-    expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    });
 
-    // Check if response JSON includes the created profile
-    expect(res.json).toHaveBeenCalledWith({ profile: createdProfile });
-  });
+    describe('getUserProfile', () => {
+        it('should return a user profile', async () => {
+            const id = 'user_id';
+            req.params.id = id;
+            const profile = { fullName: 'John Doe' };
+            Profile.findOne.mockResolvedValueOnce(profile);
 
-  it('should create a new profile with status 200', async () => {
-    // Mock data for request body
-    const newProfileData = {
-      fullName: 'Andrew Dieu',
-      address1: '2011 Sesame St',
-      address2: '',
-      city: 'Houston',
-      state: 'TX',
-      zipcode: '77007'
-    };
+            await getUserProfile(req, res);
 
-    // Mock data for created profile
-    const createdProfile = {
-      _id: 'profileId',
-      ...newProfileData
-    };
+            expect(Profile.findOne).toHaveBeenCalledWith({ user_id: id });
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ profile });
+        });
 
-    // Mock Profile.create to resolve with created profile
-    Profile.create.mockResolvedValue(createdProfile);
+        it('should handle profile not found', async () => {
+            const id = 'nonexistent_id';
+            req.params.id = id;
+            Profile.findOne.mockResolvedValueOnce(null);
 
-    // Mock request object
-    const req = { body: newProfileData };
+            await getUserProfile(req, res);
 
-    // Mock response object
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+            expect(res.status).toHaveBeenCalledWith(404);
+            expect(res.json).toHaveBeenCalledWith({ error: 'Profile not found' });
+        });
 
-    // Call createProfile function
-    await ProfileController.createProfile(req, res);
+        it('should handle errors', async () => {
+            const errorMessage = 'Internal Server Error';
+            Profile.findOne.mockRejectedValueOnce(new Error(errorMessage));
 
-    // Check if Profile.create was called with the correct arguments
-    expect(Profile.create).toHaveBeenCalledWith(newProfileData);
+            await getUserProfile(req, res);
 
-    // Check if response status is 200
-    expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    });
 
-    // Check if response JSON includes the created profile
-    expect(res.json).toHaveBeenCalledWith({ profile: createdProfile });
-  });
+    describe('createProfile', () => {
+        it('should create a new profile', async () => {
+            const profileData = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'City',
+                state: 'State',
+                zipcode: '12345',
+                user_id: 'user_id',
+            };
+            req.body = profileData;
+            const createdProfile = { ...profileData, _id: 'profile_id' };
+            Profile.create.mockResolvedValueOnce(createdProfile);
 
-  it('should return status 200', async () => {
-    // Mock data for request body with missing required fields
-    const incompleteProfileData = {
-        fullName: 'Mary Jane',
-        address1: '1234 Street Ave',
-        city: 'Dallas',
-        state: 'TX',
-        zipcode: '20402'
-    };
-  
-    // Mock request object
-    const req = { body: incompleteProfileData };
-  
-    // Mock response object
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-  
-    // Call createProfile function
-    await ProfileController.createProfile(req, res);
-  
-    // Check if response status is 200
-    expect(res.status).toHaveBeenCalledWith(200);
-  });
+            await createProfile(req, res);
 
-  it('should return status 400 when there is an error', async () => {
-    // Mock data for request body
-    const newProfileData = {
-      fullName: 'Mary Jane',
-      address1: '1234 Street Ave',
-      city: 'Dallas',
-      state: 'TX',
-      zipcode: '20402'
-    };
+            expect(Profile.create).toHaveBeenCalledWith(profileData);
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ profile: createdProfile });
+        });
 
-    // Mock Profile.create to reject with an error
-    const errorMessage = 'Database error';
-    Profile.create.mockRejectedValue(new Error(errorMessage));
+        it('should handle errors', async () => {
+            const errorMessage = 'Internal Server Error';
+            Profile.create.mockRejectedValueOnce(new Error(errorMessage));
 
-    // Mock request object
-    const req = { body: newProfileData };
+            await createProfile(req, res);
 
-    // Mock response object
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    });
 
-    // Call createProfile function
-    await ProfileController.createProfile(req, res);
+    describe('editProfile', () => {
+        it('should edit a user\'s profile successfully', async () => {
+            const updatedProfile = {
+                _id: '123',
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'New York',
+                state: 'NY',
+                zipcode: '10001',
+                user_id: '1234567890'
+            };
 
-    // Check if Profile.create was called with the correct arguments
-    expect(Profile.create).toHaveBeenCalledWith(newProfileData);
+            // Mock Profile.findOneAndUpdate to return the updated profile
+            Profile.findOneAndUpdate.mockResolvedValueOnce(updatedProfile);
 
-    // Check if response status is 400
-    expect(res.status).toHaveBeenCalledWith(400);
+            // Call the function with the mocked request and response objects
+            await editProfile(req, res);
 
-    // Check if response JSON includes the error message
-    expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
-  });
+            // Check if the response status and JSON methods are called correctly
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ profile: updatedProfile });
+        });
 
+        it('should handle profile not found', async () => {
+            const profileData = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'City',
+                state: 'State',
+                zipcode: '12345',
+                user_id: 'nonexistent_id',
+            };
+            req.body = profileData;
+            Profile.findOneAndUpdate.mockResolvedValueOnce(null);
 
-  // Add more tests for edge cases if needed
-});
+            await editProfile(req, res);
 
-describe('getProfiles', () => {
-  it('should return profiles with status 200', async () => {
-    // Mock data for profiles
-    const mockProfiles = [
-      { _id: '1', fullName: 'John Doe' },
-      { _id: '2', fullName: 'Jane Smith' },
-    ];
+            expect(res.status).toHaveBeenCalledWith(404);
+            expect(res.json).toHaveBeenCalledWith({ error: 'Profile not found' });
+        });
 
-    // Mock Profile.find to resolve with mock profiles
-    Profile.find.mockReturnValue({ sort: jest.fn().mockReturnValueOnce(mockProfiles) });
+        it('should handle errors', async () => {
+            const errorMessage = 'Internal Server Error';
+            Profile.findOneAndUpdate.mockRejectedValueOnce(new Error(errorMessage));
 
-    // Mock request and response objects
-    const req = {};
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+            await editProfile(req, res);
 
-    // Call getProfiles function
-    await ProfileController.getProfiles(req, res);
-
-    // Check if Profile.find was called with the correct arguments
-    expect(Profile.find).toHaveBeenCalledWith({});
-
-    // Check if sort was called
-    expect(Profile.find().sort).toHaveBeenCalledWith({ createdAt: -1 });
-
-    // Check if response status is 200
-    expect(res.status).toHaveBeenCalledWith(200);
-
-    // Check if response JSON includes the profiles
-    expect(res.json).toHaveBeenCalledWith(mockProfiles);
-  });
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    });
 });
