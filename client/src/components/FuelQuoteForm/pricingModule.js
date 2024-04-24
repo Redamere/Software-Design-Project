@@ -24,24 +24,26 @@ let getPrice = (userGallons, ifTexas, ifHistory) => {
         locationFactor = .04;
     }
 
-    if (ifHistory){
+    if (ifHistory) {
         rateHistoryFactor = .01;
     }
     else {
         rateHistoryFactor = 0;
     }
-    
-    if (userGallons > 1000){
+
+    if (userGallons > 1000) {
         gallonsRequestedFactor = .02;
     }
     else {
         gallonsRequestedFactor = .03;
     }
 
-        margin = (locationFactor + rateHistoryFactor + gallonsRequestedFactor + companyFactor) + suggestedPrice;
-        returnPrice + userGallons * suggestedPrice;
+    margin = (locationFactor + rateHistoryFactor + gallonsRequestedFactor + companyFactor) + suggestedPrice;
+    returnPrice + userGallons * suggestedPrice;
 
     return returnPrice;
 }
 
-export default PricingModule
+module.exports = {
+    getPrice
+}

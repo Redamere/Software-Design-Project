@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 //components
 import FormDetails from './formDetails';
-priceModule = require("./pricingModule")
+// priceModule = require("./pricingModule")
 
 //documentations
 
