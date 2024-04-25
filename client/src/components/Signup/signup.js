@@ -41,11 +41,49 @@ const SignUp = () => {
                 setPassword('');
                 setConfirmPassword('');
                 console.log('Signup Successful');
-                window.location.href = '/login';
+                // Call loginUser after successful signup
+                loginUser();
+
+
             }
         } catch (error) {
             console.error('Error:', error);
             setError(error.response?.data?.error || 'An error occurred');
+        }
+    };
+    
+    
+    const loginUser = async (e) => {
+        // Check if the event object exists and prevent the default form submission behavior
+        if (e) e.preventDefault();
+    
+        const url = '/api/login';
+        const formData = { username, password };
+    
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const json = await response.json();
+    
+          if (!response.ok) {
+            setError(json.message);
+          } else {
+            setError(null);
+            console.log(json.message);
+            // Store the user ID in a cookie
+            document.cookie = `userId=${json._id};path=/`;
+            console.log('Login Successful');
+            // Redirect to client-profile-management upon successful login
+            window.location.href = '/profile';
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          setError(error.response?.data?.message || 'An error occurred');
         }
     };
     
