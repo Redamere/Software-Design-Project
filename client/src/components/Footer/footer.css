@@ -1,0 +1,56 @@
+/* Footer container */
+.footer-container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    overflow-x: hidden;
+    /* border-top: 1px solid #ddd; */
+    /* Border color */
+    background-color: white;
+    /* Background color */
+    padding-bottom: 20px;
+    /* Bottom padding */
+    min-height: 20px;
+}
+
+/* Logo */
+.logo-container {
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+/* Links */
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-medium {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+
+
+/* Image */
+.logo-img {
+    width: 50px;
+    /* Adjust width as needed */
+}
+
+/* Links */
+.links-container {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.links-container a {
+    color: #007bff;
+    /* Link color */
+}
+
+.links-container a:hover {
+    color: #0056b3;
+    /* Hover color */
+}

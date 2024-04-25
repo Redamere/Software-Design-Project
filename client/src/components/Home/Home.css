@@ -75,3 +75,46 @@
 .home-body p {
     font-size: 1rem;
 }
+
+.home-features {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f2f2f2;
+}
+
+.home-features h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.home-features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.home-features li {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.home-testimonials {
+    text-align: center;
+    padding: 2rem;
+}
+
+.home-testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial {
+    margin-bottom: 2rem;
+}
+
+.testimonial p {
+    font-size: 1.2rem;
+}
+
+.testimonial p:last-child {
+    font-style: italic;
+}
