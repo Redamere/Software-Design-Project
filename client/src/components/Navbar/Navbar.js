@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../Assets/logo.svg'; // Import the logo.svg file
 
 import './Navbar.css';
 
 const Navbar = () => {
-    const [user, setUser] = useState(false);
+  const [user, setUser] = useState(false);
 
   const handleClick = () => {
     logout()
@@ -22,8 +23,9 @@ const Navbar = () => {
 
       <div className="logo-container">
         <a href="/">
-          <img src="/logo1.svg" alt="Logo" className="logo" />
+          <img src={logo} alt="Logo" className="logo" />
         </a>
+        <span className="title">Your Title Here</span> {/* Add the title next to the logo */}
       </div>
 
       <div className="nav-buttons">

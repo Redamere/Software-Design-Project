@@ -71,7 +71,7 @@ h1 {
 
 /* Styles for the submit button */
 button[type="submit"] {
-    background-color: #5E4D80;
+    background-color: #2a73f0;
     /* Blue background color */
     color: #fff;
     /* White text color */
@@ -90,8 +90,10 @@ button[type="submit"] {
 
 /* Styles for the submit button on hover */
 button[type="submit"]:hover {
-    background-color: #22143E;
+    background-color: #5E4D80;
+    /*22143E; */
     /* Darker blue background color on hover */
+
 }
 
 .createForm {
