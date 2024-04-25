@@ -10,7 +10,6 @@ const Home = () => {
                 <div className="home-content">
                     <h1>Welcome to Fleet</h1>
                     <p>A professional team dedicated to precise fuel rate predictions tailored to your needs.</p>
-                    <Link to="/quoteForm"><button>Get Started</button></Link> {/* Wrap button with Link */}
                 </div>
             </div>
             <div className="home-body">

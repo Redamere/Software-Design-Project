@@ -60,31 +60,38 @@ const getUserQuoteFormsInCode = async (user_id) => { // Add user_id as a paramet
 };
 
 const calculateFuelQuote = async (req, res) => {
-    const { user_id, address, city, state, zipcode, date, gallonsRequested } = req.body;
-    if (!user_id || !address || !city || !state || !zipcode || !date || !gallonsRequested) {
+    const { user_id, gallonsRequested } = req.body;
+    if (!user_id || !gallonsRequested) {
         return res.status(400).json("Missing required fields");
     }
     try {
-        // Determine if the location is out of state
-        const isOutOfState = state.toLowerCase() !== 'tx';
-
-        // Check if the user is a repeat customer based on previous orders
+        // Determine if the user is a repeat customer based on previous orders
         const userForms = await getUserQuoteFormsInCode(user_id);
-        const isRepeatedCustomer = userForms.length > 0;
+        const isRepeatCustomer = userForms.length > 0;
 
-        // Create a new Pricing document based on the provided details
-        const pricing = new Pricing({
-            user_id: user_id,
-            gallonsRequested: gallonsRequested,
-            isOutOfState: isOutOfState,
-            isRepeatCustomer: isRepeatedCustomer,
-        });
+        // Define pricing factors
+        const locationFactor = req.body.state.toLowerCase() === 'tx' ? 0.02 : 0.04;
+        const rateHistoryFactor = isRepeatCustomer ? 0.01 : 0;
+        const gallonsFactor = gallonsRequested > 1000 ? 0.02 : 0.03;
+        const companyProfit = 0.1;
 
-        // Calculate price and other details using the calculatePrice method defined in the Pricing model
-        const { suggestedPricePerGallon, totalAmountDue } = pricing.calculatePrice();
+        // Calculate suggested price per gallon
+        const basePricePerGallon = 1.50;
+        const margin = (locationFactor - rateHistoryFactor + gallonsFactor + companyProfit) * basePricePerGallon;
+        const suggestedPricePerGallon = basePricePerGallon + margin;
 
-        // Save the Pricing document to MongoDB
-        await pricing.save();
+        // Calculate total amount due
+        let totalAmountDue = gallonsRequested * suggestedPricePerGallon;
+
+        // Round to two decimal places and ensure at least two decimal places
+        totalAmountDue = totalAmountDue.toFixed(2);
+
+        // If the total amount due has less than 2 numbers after the decimal, add a 0
+        if (!totalAmountDue.includes('.')) {
+            totalAmountDue += '.00';
+        } else if (totalAmountDue.split('.')[1].length === 1) {
+            totalAmountDue += '0';
+        }
 
         // Return the calculated price
         return res.status(200).json({ suggestedPricePerGallon, totalAmountDue });
@@ -94,6 +101,8 @@ const calculateFuelQuote = async (req, res) => {
         return res.status(500).send("Error in server");
     }
 };
+
+
 
 module.exports = {
     getForms,
