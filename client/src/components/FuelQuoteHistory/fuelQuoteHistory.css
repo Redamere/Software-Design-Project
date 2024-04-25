@@ -6,6 +6,12 @@
     height: 100vh;
     padding-top: 20px;
     /* Add padding to create space between the table and the top */
+    max-width: 800px;
+    /* Set a maximum width for the container */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    overflow-x: auto;
+    /* Add horizontal scroll if the content exceeds the width */
 }
 
 /* Additional styles for the caption */
