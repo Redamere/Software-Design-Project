@@ -94,6 +94,22 @@ const NewQuoteForm = () => {
         }
     };
 
+    const getCurrentDate = () => {
+        const today = new Date();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+        const year = today.getFullYear();
+
+        if (month < 10) {
+            month = '0' + month;
+        }
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return `${year}-${month}-${day}`;
+    };
+
 
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
@@ -183,29 +199,32 @@ const NewQuoteForm = () => {
                     />
                 </div>
 
-                <div className="form-group" style={{ fontFamily: 'Inter', fontSize: '14px', fontWeight: '400', textAlign: 'left', marginBottom: '10px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px' }}>Delivery Date</label>
-                    <input
-                        type="date"
-                        id="deliveryDate"
-                        value={deliveryDate}
-                        onChange={(e) => setDeliveryDate(e.target.value)}
-                        style={{
-                            border: '2px solid #EFF3F7',
-                            borderRadius: '4px',
-                            height: '45px',
-                            width: '100%',
-                            padding: '10px',
-                            boxSizing: 'border-box',
-                            marginTop: '5px',
-                            marginBottom: '10px',
-                            fontFamily: 'Inter', // Set the font family to Inter
-                            fontSize: '14px', // Optional: Set the font size if needed
-                            fontWeight: '400' // Optional: Set the font weight if needed
-                        }}
-                    />
 
-                </div>
+<div className="form-group" style={{ fontFamily: 'Inter', fontSize: '14px', fontWeight: '400', textAlign: 'left', marginBottom: '10px' }}>
+    <label htmlFor="deliveryDate" style={{ display: 'block', marginBottom: '5px' }}>Delivery Date</label>
+    <input
+        type="date"
+        id="deliveryDate"
+        value={deliveryDate}
+        min={getCurrentDate()} // Set the minimum allowed date to the current date
+        onChange={(e) => setDeliveryDate(e.target.value)}
+        style={{
+            border: '2px solid #EFF3F7',
+            borderRadius: '4px',
+            height: '45px',
+            width: '100%',
+            padding: '10px',
+            boxSizing: 'border-box',
+            marginTop: '5px',
+            marginBottom: '10px',
+            fontFamily: 'Inter', // Set the font family to Inter
+            fontSize: '14px', // Optional: Set the font size if needed
+            fontWeight: '400' // Optional: Set the font weight if needed
+        }}
+    />
+</div>
+
+
 
                 {!suggestedPrice && (
                     <div>
