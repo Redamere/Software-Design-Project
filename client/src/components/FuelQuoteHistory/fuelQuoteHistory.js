@@ -40,7 +40,7 @@ const History = () => {
         <div className="container">
             <table className="table">
                 <caption className="caption">
-                    <h1>Fuel Quote History</h1>
+                    <h1>Past Quotes 📖</h1>
                 </caption>
                 <thead>
                     <tr>
