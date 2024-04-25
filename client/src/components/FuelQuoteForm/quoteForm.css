@@ -69,29 +69,21 @@ h1 {
     background-color: #D1F5FF;
 }
 
-/* Styles for the submit button */
-button[type="submit"] {
-    background-color: #5E4D80;
-    /* Blue background color */
-    color: #fff;
-    /* White text color */
+/* Styles for the submit button on hover */
+.submit-btn {
+    background-color: #2A73F0;
+    font-family: inter;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    height: 45px;
     border: none;
-    /* Remove border */
-    padding: 10px 20px;
-    /* Add padding */
     cursor: pointer;
-    /* Add cursor pointer */
-    border-radius: 5px;
-    /* Add border-radius */
-    font-size: 16px;
-    /* Adjust font size */
-    margin: 40px;
+    border-radius: 4px;
 }
 
-/* Styles for the submit button on hover */
-button[type="submit"]:hover {
-    background-color: #22143E;
-    /* Darker blue background color on hover */
+.submit-btn:hover {
+    background-color: #568ff1;
 }
 
 .createForm {
