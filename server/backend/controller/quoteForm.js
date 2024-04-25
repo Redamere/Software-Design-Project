@@ -50,15 +50,28 @@ const getQuoteForm = async (req, res) => {
 };
 
 
+// const getUserQuoteForms = async (req, res) => {
+//     const { id } = req.params; // Destructure 'id' from req.params
+//     try {
+//         const forms = await quoteForm
+//             .find({ user_id: id })
+//             .sort({ createdAt: -1 })
+//             .exec();  // added line
+//         res.status(200).json(forms);
+//     } catch (error) {
+//         console.error('Error fetching user quote forms:', error);
+//         return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
+//     }
+// };
 const getUserQuoteForms = async (req, res) => {
     const { id } = req.params; // Destructure 'id' from req.params
     try {
-        const forms = await quoteForm
-            .find({ user_id: id })
-            .sort({ createdAt: -1 });
+        let forms = await quoteForm.find({ user_id: id });
+        forms.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort the documents
         res.status(200).json(forms);
     } catch (error) {
-        return res.status(400).json({ error: error.message });
+        console.error('Error fetching user quote forms:', error);
+        return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
     }
 };
 

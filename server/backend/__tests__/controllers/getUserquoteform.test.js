@@ -41,21 +41,30 @@ describe('getUserQuoteForms', () => {
         expect(mockRes.json).toHaveBeenCalledWith(mockForms);
     });
 
-    // it('should return error message with status 400 if an error occurs', async () => {
-    //     const mockError = new Error('Database error');
-    //     quoteForm.find.mockRejectedValue(mockError);
+    it('should handle errors and return status 400 with error details', async () => {
+        const errorMessage = 'Database connection failed';
+        const error = new Error(errorMessage);
 
-    //     const mockReq = {
-    //         params: { id: '6628b94d57a97473ab98f775' }
-    //     };
-    //     const mockRes = {
-    //         status: jest.fn(() => mockRes),
-    //         json: jest.fn()
-    //     };
+        // Mocking the find method of quoteForm model to reject with an error
+        quoteForm.find.mockRejectedValue(error);
 
-    //     await getUserQuoteForms(mockReq, mockRes);
+        // Mock request and response objects
+        const mockReq = {
+            params: { id: '6628b94d57a97473ab98f775' }
+        };
+        const mockRes = {
+            status: jest.fn(() => mockRes),
+            json: jest.fn()
+        };
 
-    //     expect(mockRes.status).toHaveBeenCalledWith(400);
-    //     expect(mockRes.json).toHaveBeenCalledWith({ error: 'Database error' });
-    // });
+        // Call the getUserQuoteForms function
+        await getUserQuoteForms(mockReq, mockRes);
+
+        // Verify that quoteForm.find is called with correct parameters
+        expect(quoteForm.find).toHaveBeenCalledWith({ user_id: '6628b94d57a97473ab98f775' });
+
+        // Verify that response status is set to 400 and error message is sent in JSON format
+        expect(mockRes.status).toHaveBeenCalledWith(400);
+        expect(mockRes.json).toHaveBeenCalledWith({ error: 'Failed to fetch user quote forms', details: errorMessage });
+    });
 });

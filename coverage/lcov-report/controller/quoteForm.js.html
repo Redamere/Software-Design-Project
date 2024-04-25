@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.76% </span>
+                <span class="strong">69.93% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>79/130</span>
+                <span class='fraction'>100/143</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.76% </span>
+                <span class="strong">69.93% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>79/130</span>
+                <span class='fraction'>100/143</span>
             </div>
         
             
@@ -192,7 +192,20 @@
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -250,7 +263,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -258,15 +270,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -373,29 +399,42 @@ const getQuoteForm = async (req, res) =&gt; {
 };
 &nbsp;
 &nbsp;
+// const getUserQuoteForms = async (req, res) =&gt; {
+//     const { id } = req.params; // Destructure 'id' from req.params
+//     try {
+//         const forms = await quoteForm
+//             .find({ user_id: id })
+//             .sort({ createdAt: -1 })
+//             .exec();  // added line
+//         res.status(200).json(forms);
+//     } catch (error) {
+//         console.error('Error fetching user quote forms:', error);
+//         return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
+//     }
+// };
 const getUserQuoteForms = async (req, res) =&gt; {
     const { id } = req.params; // Destructure 'id' from req.params
     try {
-        const forms = await quoteForm
-            .find({ user_id: id })
-            .sort({ createdAt: -1 })<span class="branch-0 cbranch-no" title="branch not covered" >;</span>
-<span class="cstat-no" title="statement not covered" >        res.status(200).json(forms);</span>
+        let forms = await quoteForm.find({ user_id: id });
+        forms.sort((a, b) =&gt; new Date(b.createdAt) - new Date(a.createdAt)); // Sort the documents
+        res.status(200).json(forms);
     } catch (error) {
-        return res.status(400).json({ error: error.message });
+        console.error('Error fetching user quote forms:', error);
+        return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
     }
 };
 &nbsp;
 &nbsp;
-const getUserQuoteFormsInCode = <span class="fstat-no" title="function not covered" >async (user_id) =&gt; { // Add user_id as a parameter</span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const forms = await quoteForm</span>
-<span class="cstat-no" title="statement not covered" >            .find({ user_id: user_id }) // Use user_id parameter to filter forms</span>
-<span class="cstat-no" title="statement not covered" >            .sort({ createdAt: -1 });</span>
-<span class="cstat-no" title="statement not covered" >        return forms; // Return the forms</span>
-<span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
+const getUserQuoteFormsInCode = async (user_id) =&gt; { // Add user_id as a parameter
+    try {
+        const forms = await quoteForm
+            .find({ user_id: user_id }) // Use user_id parameter to filter forms
+            .sort({ createdAt: -1 });
+        return forms; // Return the forms
+    } <span class="branch-0 cbranch-no" title="branch not covered" >catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >        throw error; // Throw any errors</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+};
 &nbsp;
 const calculateFuelQuote = <span class="fstat-no" title="function not covered" >async (req, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const { user_id, gallonsRequested } = req.body;</span>
@@ -457,7 +496,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-25T13:58:17.606Z
+                at 2024-04-25T18:48:58.154Z
             </div>
         <script src="../prettify.js"></script>
         <script>
