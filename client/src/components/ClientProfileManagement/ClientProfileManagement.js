@@ -13,27 +13,20 @@ const ClientProfileManagement = () => {
   const [error, setError] = useState(null);
   const [recentProfile, setRecentProfile] = useState(null);
 
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      const response = await fetch('/api/profile')
-      const json = await response.json()
+  const logout = () => {
+    document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
-      if (response.ok) {
-        console.log('Profiles fetched successfully', json)
-
-        if (json.length > 0) {
-          setRecentProfile(json[json.length - 1])
-        }
-      }
-    }
-
-    fetchProfiles()
-  }, [])
+    // Redirect to the home page
+    window.location.href = '/login';
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const profile = { fullName, address1, address2, city, state, zipcode }
+    const userId = document.cookie.split('; ').find(row => row.startsWith('userId=')).split('=')[1];
+    console.log('userId:', userId);
+
+    const profile = { fullName, address1, address2, city, state, zipcode, user_id: userId };
 
     const response = await fetch('/api/profile', {
       method: 'POST',
@@ -56,6 +49,7 @@ const ClientProfileManagement = () => {
       setZipcode('')
       setError(null)
       console.log('Profile created successfully', json)
+      logout()
     }
   };
 
