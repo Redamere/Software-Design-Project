@@ -1,5 +1,5 @@
 const quoteForm = require("../models/quoteFormModels")
-const Pricing = require('../models/pricingModel')
+const Pricing = require('../models/quoteFormModels')
 const mongoose = require("mongoose")
 
 // get all forms
@@ -27,14 +27,28 @@ const postQuoteForm = async (req, res) => {
     }
 }
 
+// const getQuoteForm = async (req, res) => {
+//     const {id} = req.params
+//     let quoteRequest = await quoteForm.findById(id)
+//     res.status(200).json(quoteRequest)
+//     if (!quoteRequest){
+//         return res.status(404).json({error: "Could not find this form"})
+//     }
+// }
 const getQuoteForm = async (req, res) => {
-    const {id} = req.params
-    let quoteRequest = await quoteForm.findById(id)
-    res.status(200).json(quoteRequest)
-    if (!quoteRequest){
-        return res.status(404).json({error: "Could not find this form"})
+    const { id } = req.params;
+    try {
+        let quoteRequest = await quoteForm.findById(id);
+        if (!quoteRequest) {
+            return res.status(404).json({ error: "Could not find this form" });
+        }
+        return res.status(200).json(quoteRequest);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
+
 
 const getUserQuoteForms = async (req, res) => {
     const { id } = req.params; // Destructure 'id' from req.params
@@ -47,6 +61,7 @@ const getUserQuoteForms = async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 };
+
 
 const getUserQuoteFormsInCode = async (user_id) => { // Add user_id as a parameter
     try {
@@ -109,5 +124,7 @@ module.exports = {
     postQuoteForm,
     getQuoteForm,
     getUserQuoteForms,
-    calculateFuelQuote
+    calculateFuelQuote,
+    getUserQuoteFormsInCode
+
 }
