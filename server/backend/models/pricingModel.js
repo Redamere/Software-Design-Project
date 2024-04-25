@@ -35,7 +35,7 @@ const pricingSchema = new Schema({
 });
 
 // Method to calculate price and other details
-pricingSchema.methods.calculatePrice = function() {
+pricingSchema.methods.calculatePrice = function () {
     // Define pricing factors
     let locationFactor = this.isOutOfState ? 0.04 : 0.02;
     let rateHistoryFactor = this.isRepeatCustomer ? -0.01 : 0.00;

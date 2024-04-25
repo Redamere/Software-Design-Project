@@ -7,6 +7,7 @@ import QuoteHistoryDetails from './quoteHistoryDetails'
 // import FormDetails from '../formDetails';
 // import FormDetails from '../FuelQuoteForm/formDetails';
 
+
 const History = () => {
 
     const [quotes, setQuotes] = useState(null);
@@ -47,7 +48,7 @@ const History = () => {
                         <th>Gallons Requested</th>
                         <th>Delivery Address</th>
                         <th>Delivery Date</th>
-                        <th>Suggested Price / gallon</th>
+                        <th>Price / Gallon</th>
                         <th>Created At</th>
                     </tr>
                 </thead>

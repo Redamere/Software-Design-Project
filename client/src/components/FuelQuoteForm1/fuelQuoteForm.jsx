@@ -190,6 +190,7 @@ const NewQuoteForm = () => {
                         id="deliveryDate"
                         value={deliveryDate}
                         onChange={(e) => setDeliveryDate(e.target.value)}
+                        min={new Date().toISOString().split('T')[0]} // Set the minimum date to today
                         style={{
                             border: '2px solid #EFF3F7',
                             borderRadius: '4px',
@@ -199,9 +200,9 @@ const NewQuoteForm = () => {
                             boxSizing: 'border-box',
                             marginTop: '5px',
                             marginBottom: '10px',
-                            fontFamily: 'Inter', // Set the font family to Inter
-                            fontSize: '14px', // Optional: Set the font size if needed
-                            fontWeight: '400' // Optional: Set the font weight if needed
+                            fontFamily: 'Inter',
+                            fontSize: '14px',
+                            fontWeight: '400'
                         }}
                     />
 
@@ -281,6 +282,21 @@ const NewQuoteForm = () => {
 
 
             </form>
+            <div
+                style={{
+                    maxWidth: '400px',
+                    margin: 'auto',
+                    padding: '20px',
+                    textAlign: 'center',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
+                    minHeight: '40vh', // Ensure the container takes at least the full viewport height
+                    display: 'flex',
+                    flexDirection: 'column', // Ensure child elements are stacked vertically
+                    justifyContent: 'space-between', // Push content to the top and bottom
+                }}
+            >
+            </div>
 
         </div>
     );
