@@ -32,7 +32,8 @@ const SignUp = () => {
             const json = await response.json();
     
             if (!response.ok) {
-                setError(json.error);
+                // Display error message from API response
+                setError(json.message);
             } else {
                 setError(null);
                 console.log(json.message);
@@ -43,14 +44,14 @@ const SignUp = () => {
                 console.log('Signup Successful');
                 // Call loginUser after successful signup
                 loginUser();
-
-
             }
         } catch (error) {
             console.error('Error:', error);
-            setError(error.response?.data?.error || 'An error occurred');
+            // Display generic error message for network or server errors
+            setError('An error occurred while signing up');
         }
     };
+    
     
     
     const loginUser = async (e) => {
