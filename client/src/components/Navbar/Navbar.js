@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../Assets/logo.svg'; // Import the logo.svg file
 
 import './Navbar.css';
 
 const Navbar = () => {
-    const [user, setUser] = useState(false);
+  const [user, setUser] = useState(false);
 
   const handleClick = () => {
     logout()
@@ -22,12 +23,13 @@ const Navbar = () => {
 
       <div className="logo-container">
         <a href="/">
-          <img src="/logo1.svg" alt="Logo" className="logo" />
+          <img src={logo} alt="Logo" className="logo" />
         </a>
+        {/* <span className="title">Your Title Here</span> */}
       </div>
 
       <div className="nav-buttons">
-        <Link to="/quoteForm" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
+        <Link to="/form" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
           <button className="nav-button">Add a Quote</button>
         </Link>
         <Link to="/history" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
@@ -75,4 +77,3 @@ export default Navbar;
 //         </ul>
 //     </nav>
 // }
-
