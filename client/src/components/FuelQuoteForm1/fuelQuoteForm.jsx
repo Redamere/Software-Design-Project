@@ -49,7 +49,11 @@ const NewQuoteForm = () => {
                 setState(data.profile.state);
                 setZipcode(data.profile.zipcode);
                 setFullName(data.profile.fullName);
-                setFullAddress(`${data.profile.address1}, ${data.profile.address2}, ${data.profile.city}, ${data.profile.state}, ${data.profile.zipcode}`);
+                let fullAddress = `${data.profile.address1}, ${data.profile.city}, ${data.profile.state}, ${data.profile.zipcode}`;
+                if (data.profile.address2.trim() !== '') {
+                    fullAddress += `, ${data.profile.address2}`;
+                }
+                setFullAddress(fullAddress);
                 setUserId(userId);
             })
             .catch(error => {
