@@ -27,7 +27,7 @@ const Navbar = () => {
       </div>
 
       <div className="nav-buttons">
-        <Link to="/form" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
+        <Link to="/quoteForm" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
           <button className="nav-button">Add a Quote</button>
         </Link>
         <Link to="/history" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>

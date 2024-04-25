@@ -9,7 +9,8 @@ import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
 import Signup from './components/Signup/signup';
 import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
-import EditProfile from './components/EditProfile/editProfile'; // Renamed the import to match the component name
+import EditProfile from './components/EditProfile/editProfile';
+import NewQuoteForm from './components/FuelQuoteForm1/fuelQuoteForm';
 
 function App() {
     return (
@@ -45,6 +46,10 @@ function App() {
                         <Route
                             path="/editProfile"
                             element={<EditProfile />}
+                        />
+                        <Route
+                            path="/quoteForm"
+                            element={<NewQuoteForm />}
                         />
                     </Routes>
             
