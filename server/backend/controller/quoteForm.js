@@ -87,6 +87,7 @@ const getUserQuoteFormsInCode = async (user_id) => { // Add user_id as a paramet
     }
 };
 
+
 const calculateFuelQuote = async (req, res) => {
     const { user_id, gallonsRequested } = req.body;
     if (!user_id || !gallonsRequested) {
@@ -129,9 +130,6 @@ const calculateFuelQuote = async (req, res) => {
         return res.status(500).send("Error in server");
     }
 };
-
-
-
 module.exports = {
     getForms,
     postQuoteForm,

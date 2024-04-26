@@ -7,6 +7,7 @@ import Login from './components/Login/login';
 import History from './components/FuelQuoteHistory/fuelQuoteHistory';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/footer';
 import Signup from './components/Signup/signup';
 import ClientProfileManagement from './components/ClientProfileManagement/ClientProfileManagement';
 import EditProfile from './components/EditProfile/editProfile';
@@ -21,8 +22,14 @@ function App() {
                     <Routes>
                         <Route
                             path="/"
-                            element={<Home />}
+                            element={
+                                <>
+                                    <Home />
+                                    <Footer />
+                                </>
+                            }
                         />
+
                         <Route
                             path="/form"
                             element={<QuoteForm />}
@@ -52,8 +59,9 @@ function App() {
                             element={<NewQuoteForm />}
                         />
                     </Routes>
-            
+
                 </div>
+
             </BrowserRouter>
         </div>
     );

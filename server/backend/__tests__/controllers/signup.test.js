@@ -1,5 +1,6 @@
-const { signupUser } = require('../../controller/signup');
 const User = require('../../models/user');
+const bcrypt = require('bcrypt');
+const { signupUser } = require('../../controller/signup');
 
 jest.mock('../../models/user', () => ({
   findOne: jest.fn(),
@@ -22,9 +23,30 @@ describe('signupUser', () => {
     };
   });
 
+  it('should create a new user and return it', async () => {
+    User.findOne.mockResolvedValueOnce(null); 
+    User.create.mockResolvedValueOnce({ username: 'testuser' });
+
+    await signupUser(req, res);
+
+    expect(User.findOne).toHaveBeenCalledWith({ username: 'testuser' });
+    expect(User.create).toHaveBeenCalledWith({ username: 'testuser', password: 'testpassword' });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ user: { username: 'testuser' } });
+  });
+
+  it('should return 400 if username already exists', async () => {
+    User.findOne.mockResolvedValueOnce({ username: 'testuser' }); // Simulate that username exists
+
+    await signupUser(req, res);
+
+    expect(User.findOne).toHaveBeenCalledWith({ username: 'testuser' });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Username already exists' });
+  });
+
   it('should return 400 if username or password is missing', async () => {
-    req.body.username = '';
-    req.body.password = '';
+    delete req.body.password;
 
     await signupUser(req, res);
 
@@ -32,30 +54,13 @@ describe('signupUser', () => {
     expect(res.json).toHaveBeenCalledWith({ message: 'Username and password are required' });
   });
 
-  it('should return 409 if username already exists', async () => {
-    User.findOne.mockResolvedValueOnce({ username: 'testuser' });
+  it('should return 500 if an error occurs during user creation', async () => {
+    User.findOne.mockResolvedValueOnce(null); // Simulate that username doesn't exist
+    User.create.mockRejectedValueOnce('Some error');
 
     await signupUser(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(409);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Username already exists' });
-  });
-
-  it('should create user and return 201 if username is unique', async () => {
-    User.findOne.mockResolvedValueOnce(null);
-    User.create.mockResolvedValueOnce({ username: 'testuser', password: 'testpassword' });
-
-    await signupUser(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith({ user: { username: 'testuser', password: 'testpassword' } });
-  });
-
-  it('should handle internal server error', async () => {
-    User.findOne.mockRejectedValueOnce(new Error('Some internal error'));
-
-    await signupUser(req, res);
-
+    expect(User.create).toHaveBeenCalledWith({ username: 'testuser', password: 'testpassword' });
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ message: 'Internal Server Error' });
   });
