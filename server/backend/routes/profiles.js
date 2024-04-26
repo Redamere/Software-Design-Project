@@ -11,7 +11,7 @@ const {
 const router = express.Router()
 router.get('/', getProfiles)
 
-// GET all profiles
+// // GET all profiles
 router.get('/:id', getUserProfile)
 
 // POST a new profile

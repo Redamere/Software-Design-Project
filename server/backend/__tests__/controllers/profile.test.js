@@ -1,6 +1,7 @@
 const Profile = require('../../models/profileModel');
 const {
     getProfiles,
+    getUserProfile,
     createProfile,
     editProfile
 } = require('../../controller/profileController');
@@ -53,6 +54,42 @@ describe('Profile Controller', () => {
         });
     });
 
+    describe('getUserProfile', () => {
+        it('should return a user profile', async () => {
+            const id = 'user_id';
+            req.params.id = id;
+            const profile = { fullName: 'John Doe' };
+            Profile.findOne.mockResolvedValueOnce(profile);
+
+            await getUserProfile(req, res);
+
+            expect(Profile.findOne).toHaveBeenCalledWith({ user_id: id });
+            expect(res.status).toHaveBeenCalledWith(200);
+            expect(res.json).toHaveBeenCalledWith({ profile });
+        });
+
+        it('should handle profile not found', async () => {
+            const id = 'nonexistent_id';
+            req.params.id = id;
+            Profile.findOne.mockResolvedValueOnce(null);
+
+            await getUserProfile(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(404);
+            expect(res.json).toHaveBeenCalledWith({ error: 'Profile not found' });
+        });
+
+        it('should handle errors', async () => {
+            const errorMessage = 'Internal Server Error';
+            Profile.findOne.mockRejectedValueOnce(new Error(errorMessage));
+
+            await getUserProfile(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    });
+
     describe('createProfile', () => {
         it('should create a new profile', async () => {
             const profileData = {
@@ -98,20 +135,32 @@ describe('Profile Controller', () => {
                 zipcode: '10001',
                 user_id: '1234567890'
             };
-
+    
             // Mock Profile.findOneAndUpdate to return the updated profile
             Profile.findOneAndUpdate.mockResolvedValueOnce(updatedProfile);
-
+    
+            // Set the request body
+            req.body = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'New York',
+                state: 'NY',
+                zipcode: '10001',
+                user_id: '1234567890'
+            };
+    
             // Call the function with the mocked request and response objects
             await editProfile(req, res);
-
+    
             // Check if the response status and JSON methods are called correctly
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({ profile: updatedProfile });
         });
-
+    
         it('should handle profile not found', async () => {
-            const profileData = {
+            // Set the request body
+            req.body = {
                 fullName: 'John Doe',
                 address1: '123 Main St',
                 address2: 'Apt 101',
@@ -120,23 +169,82 @@ describe('Profile Controller', () => {
                 zipcode: '12345',
                 user_id: 'nonexistent_id',
             };
-            req.body = profileData;
+    
+            // Mock Profile.findOneAndUpdate to return null
             Profile.findOneAndUpdate.mockResolvedValueOnce(null);
-
+    
+            // Call the function with the mocked request and response objects
             await editProfile(req, res);
-
+    
+            // Check if the response status and JSON methods are called correctly
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.json).toHaveBeenCalledWith({ error: 'Profile not found' });
         });
-
+    
         it('should handle errors', async () => {
+            // Set the request body
+            req.body = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'New York',
+                state: 'NY',
+                zipcode: '10001',
+                user_id: '1234567890'
+            };
+    
             const errorMessage = 'Internal Server Error';
+            // Mock Profile.findOneAndUpdate to throw an error
             Profile.findOneAndUpdate.mockRejectedValueOnce(new Error(errorMessage));
-
+    
+            // Call the function with the mocked request and response objects
             await editProfile(req, res);
-
+    
+            // Check if the response status and JSON methods are called correctly
             expect(res.status).toHaveBeenCalledWith(400);
             expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+        });
+    
+        it('should return 400 for invalid address fields', async () => {
+            // Set the request body
+            req.body = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'New York',
+                state: 'NY',
+                zipcode: '10001',
+                user_id: '1234567890'
+            };
+    
+            // Make the address1 field longer than 50 characters
+            req.body.address1 = 'A'.repeat(51);
+    
+            // Call the function with the mocked request and response objects
+            await editProfile(req, res);
+    
+            // Check if the response status and JSON methods are called correctly
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: 'Address fields must be no longer than 50 characters' });
+        });
+        it('should return 400 for invalid zip code format', async () => {
+            // Set the request body with an invalid zip code format
+            req.body = {
+                fullName: 'John Doe',
+                address1: '123 Main St',
+                address2: 'Apt 101',
+                city: 'New York',
+                state: 'NY',
+                zipcode: 'invalid_zipcode', // Invalid zip code format
+                user_id: '1234567890'
+            };
+    
+            // Call the function with the mocked request and response objects
+            await editProfile(req, res);
+    
+            // Check if the response status and JSON methods are called correctly
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ error: 'Invalid zip code format' });
         });
     });
 });
