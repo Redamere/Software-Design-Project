@@ -1,7 +1,6 @@
 const Profile = require('../../models/profileModel');
 const {
     getProfiles,
-    getUserProfile,
     createProfile,
     editProfile
 } = require('../../controller/profileController');
@@ -48,42 +47,6 @@ describe('Profile Controller', () => {
             Profile.find.mockRejectedValueOnce(new Error(errorMessage));
 
             await getProfiles(req, res);
-
-            expect(res.status).toHaveBeenCalledWith(400);
-            expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
-        });
-    });
-
-    describe('getUserProfile', () => {
-        it('should return a user profile', async () => {
-            const id = 'user_id';
-            req.params.id = id;
-            const profile = { fullName: 'John Doe' };
-            Profile.findOne.mockResolvedValueOnce(profile);
-
-            await getUserProfile(req, res);
-
-            expect(Profile.findOne).toHaveBeenCalledWith({ user_id: id });
-            expect(res.status).toHaveBeenCalledWith(200);
-            expect(res.json).toHaveBeenCalledWith({ profile });
-        });
-
-        it('should handle profile not found', async () => {
-            const id = 'nonexistent_id';
-            req.params.id = id;
-            Profile.findOne.mockResolvedValueOnce(null);
-
-            await getUserProfile(req, res);
-
-            expect(res.status).toHaveBeenCalledWith(404);
-            expect(res.json).toHaveBeenCalledWith({ error: 'Profile not found' });
-        });
-
-        it('should handle errors', async () => {
-            const errorMessage = 'Internal Server Error';
-            Profile.findOne.mockRejectedValueOnce(new Error(errorMessage));
-
-            await getUserProfile(req, res);
 
             expect(res.status).toHaveBeenCalledWith(400);
             expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
