@@ -19,12 +19,12 @@ const profileSchema = new Schema({
         required: [true, 'Address line 1 is required'],
         trim: true,
         minlength: [5, 'Address line 1 must be at least 5 characters long'],
-        maxlength: [100, 'Address line 1 cannot exceed 100 characters'],
+        maxlength: [50, 'Address line 1 cannot exceed 50 characters'],
     },
     address2: {
         type: String,
         trim: true,
-        maxlength: [100, 'Address line 2 cannot exceed 100 characters'],
+        maxlength: [50, 'Address line 2 cannot exceed 100 characters'],
     },
     city: {
         type: String,
@@ -38,7 +38,7 @@ const profileSchema = new Schema({
         required: [true, 'State is required'],
         trim: true,
         minlength: [2, 'State must be at least 2 characters long'],
-        maxlength: [50, 'State cannot exceed 50 characters'],
+        maxlength: [2, 'State cannot exceed 2 characters'],
     },
     zipcode: {
         type: String,
