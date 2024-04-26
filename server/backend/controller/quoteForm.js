@@ -1,5 +1,5 @@
 const quoteForm = require("../models/quoteFormModels")
-const Pricing = require('../models/pricingModel')
+const Pricing = require('../models/quoteFormModels')
 const mongoose = require("mongoose")
 
 // get all forms
@@ -27,26 +27,54 @@ const postQuoteForm = async (req, res) => {
     }
 }
 
+// const getQuoteForm = async (req, res) => {
+//     const {id} = req.params
+//     let quoteRequest = await quoteForm.findById(id)
+//     res.status(200).json(quoteRequest)
+//     if (!quoteRequest){
+//         return res.status(404).json({error: "Could not find this form"})
+//     }
+// }
 const getQuoteForm = async (req, res) => {
-    const {id} = req.params
-    let quoteRequest = await quoteForm.findById(id)
-    res.status(200).json(quoteRequest)
-    if (!quoteRequest){
-        return res.status(404).json({error: "Could not find this form"})
+    const { id } = req.params;
+    try {
+        let quoteRequest = await quoteForm.findById(id);
+        if (!quoteRequest) {
+            return res.status(404).json({ error: "Could not find this form" });
+        }
+        return res.status(200).json(quoteRequest);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};
 
+
+// const getUserQuoteForms = async (req, res) => {
+//     const { id } = req.params; // Destructure 'id' from req.params
+//     try {
+//         const forms = await quoteForm
+//             .find({ user_id: id })
+//             .sort({ createdAt: -1 })
+//             .exec();  // added line
+//         res.status(200).json(forms);
+//     } catch (error) {
+//         console.error('Error fetching user quote forms:', error);
+//         return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
+//     }
+// };
 const getUserQuoteForms = async (req, res) => {
     const { id } = req.params; // Destructure 'id' from req.params
     try {
-        const forms = await quoteForm
-            .find({ user_id: id })
-            .sort({ createdAt: -1 });
+        let forms = await quoteForm.find({ user_id: id });
+        forms.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort the documents
         res.status(200).json(forms);
     } catch (error) {
-        return res.status(400).json({ error: error.message });
+        console.error('Error fetching user quote forms:', error);
+        return res.status(400).json({ error: 'Failed to fetch user quote forms', details: error.message });
     }
 };
+
 
 const getUserQuoteFormsInCode = async (user_id) => { // Add user_id as a parameter
     try {
@@ -58,6 +86,7 @@ const getUserQuoteFormsInCode = async (user_id) => { // Add user_id as a paramet
         throw error; // Throw any errors
     }
 };
+
 
 const calculateFuelQuote = async (req, res) => {
     const { user_id, gallonsRequested } = req.body;
@@ -101,13 +130,12 @@ const calculateFuelQuote = async (req, res) => {
         return res.status(500).send("Error in server");
     }
 };
-
-
-
 module.exports = {
     getForms,
     postQuoteForm,
     getQuoteForm,
     getUserQuoteForms,
-    calculateFuelQuote
+    calculateFuelQuote,
+    getUserQuoteFormsInCode
+
 }

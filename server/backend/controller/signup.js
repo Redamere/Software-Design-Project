@@ -16,7 +16,7 @@ const signupUser = async (req, res) => {
 
     // Create user
     const user = await User.create({ username, password });
-    res.status(201).json({ user });
+    res.status(200).json({ user });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
