@@ -21,7 +21,9 @@ The MERN stack is a full-stack development framework that consists of four main 
 
 Software-Design-Project/
 
-|-- client/                # React front-end application
+client/                # React front-end application\
+server/backend/        # Express back-end application
+
 
 ## Getting Started
 
@@ -30,10 +32,24 @@ Software-Design-Project/
 git clone https://github.com/your-username/Software-Design-Project.git
 ```
 
-2. Navigate to client and npm start:
+2. Starting the client:
 ```bash
 cd Software-Design-Project/client
 ```
 ```bash
+npm i -y
+```
+```bash
 npm start
+```
+
+2. Starting the server:
+```bash
+cd Software-Design-Project/server/backend
+```
+```bash
+npm i
+```
+```bash
+nodemon server.js
 ```
